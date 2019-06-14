@@ -154,4 +154,31 @@ New-ItemProperty -Path "HKCU:\Environment" -Name "NVM_HOME" -Value "$NVM_HOME" -
 # use setx once so it broadcasts WM_SETTINGCHANGE message
 setx.exe NVM_LINK "$Env:USERPROFILE\nodejs" | Out-Null
 
-# $NVM_NODE\node.exe setup.js
+$nvmZipUrl = "https://github.com/jchip/nvmw/archive/1.0.1.zip"
+$nvmDestZipFile = "$NVM_CACHE\1.0.1.zip"
+
+Invoke-WebRequest $nvmZipUrl -o $nvmDestZipFile
+
+$installFiles = @( "bin", "dist", "package.json" )
+
+Add-Type -Assembly System.IO.Compression.FileSystem
+$zip = [IO.Compression.ZipFile]::OpenRead($nvmDestZipFile)
+$zip.Entries |  
+ForEach-Object { 
+    $f = $_.FullName.split("/")
+    $f = $f[1..($f.count - 1)]
+    $name = [String]::Join("\", $f)
+    if ( $installFiles -contains $f[0] ) {
+
+        $fullName = "$NVM_HOME\$name"
+        if ( $_.Name -eq "" ) {
+            if ( -not (Test-Path "$fullName")) {
+                New-Item -Path "$fullName" -ItemType "directory" | Out-Null
+            }
+        }
+        else {
+            [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$fullName", $true) 
+        }
+    }
+}
+$zip.Dispose()

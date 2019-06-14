@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Tom.Huang <hzlhu.dargon@gmail.com>",
   "scripts": {
+    "build": "webpack",
     "release": "webpack && node pack.js"
   },
   "dependencies": {
