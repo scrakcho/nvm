@@ -9,17 +9,16 @@ Start a Windows PowerShell terminal and run the following: (copy and paste into 
 
 ```ps
 cd $Env:USERPROFILE;
-$Env:NVM_HOME="$Env:USERPROFILE\nvmw";
 Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvmw/master/install.ps1 -o install.ps1;
-.\install.ps1;
+.\install.ps1 -nvmhome $Env:USERPROFILE\nvmw;
 del install.ps1
 ```
 
-This will install nvmw and Node.js v10.16.0 to directory `nvmw` under your home directory.  
+This will install nvmw and Node.js v10.16.0 to directory `nvmw` under your home specified by `$Env:USERPROFILE`.
 
-If you want to install this under another directory, then set it different for `$Env:NVM_HOME`.
+If you want to install this under another directory, then set it different for the param `-nvmhome`.
 
-If you don't set it, then a Directory Browser dialog will be opened for you to choose a directory.
+If you don't set it, then it will check `$Env:NVM_HOME`, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
 
 ## Usage
 

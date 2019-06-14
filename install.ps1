@@ -1,3 +1,8 @@
+param (
+    [string]$nvmhome,
+    [string]$nvmlink
+)
+
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -115,7 +120,11 @@ function Compare-Path {
     }
 }
 
-if ( Test-Path Env:NVM_HOME ) {
+if ( $nvmhome -ne "" ) {
+    $NVM_HOME=$nvmhome
+    Write-Output "Got NVM_HOME $NVM_HOME from command line"
+}
+elseif ( Test-Path Env:NVM_HOME ) {
     $NVM_HOME = $Env:NVM_HOME
     Write-Output "Got NVM_HOME $NVM_HOME from Env"
 }
