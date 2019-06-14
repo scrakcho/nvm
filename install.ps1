@@ -138,6 +138,19 @@ $NVM_NODE = "$NVM_HOME\nodejs"
 $NVM_BIN = "$NVM_HOME\bin"
 $NVM_NODE_EXE = "$NVM_HOME\node.exe"
 
+if ( $nvmlink -ne "" ) {
+    $NVM_LINK=$nvmlink
+    Write-Output "Got NVM_LINK $NVM_LINK from command line"
+}
+elseif ( Test-Path Env:NVM_LINK ) {
+    $NVM_LINK = $Env:NVM_LINK
+    Write-Output "Got NVM_LINK $NVM_LINK from Env"
+}
+else {
+    $NVM_LINK = "$NVM_NODE\bin"
+    Write-Output "Default NVM_LINK to $NVM_LINK"
+}
+
 if ( -not (Test-Path $NVM_NODE_EXE ) ) {
     Get-NodeJS $DefaultNodeVersion
 }
@@ -159,14 +172,14 @@ function Update-UserPath ($dirsToAdd) {
     }    
 }
 
-$dirsToAdd = Compare-Path -Directory "$NVM_BIN"
+$dirsToAdd = Compare-Path -Directory @( "$NVM_BIN", "$NVM_LINK" )
 Update-UserPath $dirsToAdd
 
-$Env:NVM_LINK = "$Env:USERPROFILE\nodejs"
+$Env:NVM_LINK = "$NVM_LINK"
 $Env:NVM_HOME = $NVM_HOME
 New-ItemProperty -Path "HKCU:\Environment" -Name "NVM_HOME" -Value "$NVM_HOME" -Force | Out-Null
 # use setx once so it broadcasts WM_SETTINGCHANGE message
-setx.exe NVM_LINK "$Env:USERPROFILE\nodejs" | Out-Null
+setx.exe NVM_LINK "$NVM_LINK" | Out-Null
 
 function installNvmw() {
     $nvmZipUrl = "https://github.com/jchip/nvmw/archive/v1.0.1.zip"
