@@ -15,7 +15,7 @@
     "mkdirp": "*",
     "request": "*",
     "rmdir": "*",
-    "underscore": "1.4.x",
+    "lodash": "^4.17.11",
     "winreg": "*"
   },
   "devDependencies": {

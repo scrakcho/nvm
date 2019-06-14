@@ -3270,6 +3270,7 @@ lodash:
  _:
   '^4.17.10,^4.17.11': 4.17.11
  4.17.11:
+  top: 1
   $: sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
   _: 'https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz'
 loose-envify:
@@ -4968,14 +4969,6 @@ typedarray:
  0.0.6:
   $: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   _: 'https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz'
-underscore:
- _latest: 1.9.1
- _:
-  1.4.x: 1.4.4
- 1.4.4:
-  top: 1
-  $: sha1-YaajIBBiKvoHljvzJSA88SI51gQ=
-  _: 'https://registry.npmjs.org/underscore/-/underscore-1.4.4.tgz'
 unicode-canonical-property-names-ecmascript:
  _latest: 1.0.4
  _:
