@@ -125,7 +125,7 @@ $NVM_BIN = "$NVM_HOME\bin"
 $NVM_NODE_EXE = "$NVM_HOME\node.exe"
 
 if ( -not (Test-Path $NVM_NODE_EXE ) ) {
-    # Get-NodeJS "v10.16.0"
+    Get-NodeJS "v10.16.0"
 }
 
 function Update-UserPath ($dirsToAdd) {
