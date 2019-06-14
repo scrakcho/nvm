@@ -30,7 +30,7 @@ function Find-Folders {
 }
 
 function Get-NodeJS($version) {
-    if ( -not (Test-Path $NVM_NODE_BIN) ) {
+    if ( -not (Test-Path $NVM_NODE_EXE) ) {
         Try {
             if ( -not (Test-Path $NVM_NODE )) {
                 New-Item -Path "$NVM_NODE" -ItemType "directory" | Out-Null
@@ -56,7 +56,7 @@ function Get-NodeJS($version) {
             Add-Type -Assembly System.IO.Compression.FileSystem
             $zip = [IO.Compression.ZipFile]::OpenRead($destZipFile)
             $zip.Entries | Where-Object {$_.Name -like 'node.exe'} | 
-                ForEach-Object {[System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$NVM_NODE_BIN", $true)}
+                ForEach-Object {[System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$NVM_NODE_EXE", $true)}
             $zip.Dispose()
 
             # Expand-Archive "$destZipFile" $NVM_HOME\node
@@ -120,13 +120,14 @@ if ( Test-Path Env:NVM_HOME ) {
 
 $NVM_CACHE="$NVM_HOME\cache"
 $NVM_NODE="$NVM_HOME\nodejs"
-$NVM_NODE_BIN="$NVM_NODE\node.exe"
+$NVM_BIN="$NVM_HOME\bin"
+$NVM_NODE_EXE="$NVM_HOME\node.exe"
 
-if ( -not (Test-Path $NVM_NODE_BIN ) ) {
+if ( -not (Test-Path $NVM_NODE_EXE ) ) {
     Get-NodeJS "v10.16.0"
 }
 
-Add-Path -Directory "$NVM_HOME"
+Add-Path -Directory "$NVM_BIN"
 $Env:NVM_LINK="$Env:USERPROFILE\nodejs"
 $Env:NVM_HOME=$NVM_HOME
 New-ItemProperty -Path "HKCU:\Environment" -Name "Path" -Value "$Env:Path" -Force | Out-Null
