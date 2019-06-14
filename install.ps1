@@ -47,9 +47,12 @@ function Get-NodeJS($version) {
                 New-Item -Path "$cacheDir" -ItemType "directory" | Out-Null
             }
             $destZipFile = "$cacheDir\node.zip"
-            ""; ""; ""; ""; ""; "";
-            Write-Output "Retrieving $nodejsBinUrl"
-            Invoke-WebRequest $nodejsBinUrl -o $destZipFile
+
+            if ( -not (Test-Path "$destZipFile")) {
+                ""; ""; ""; ""; ""; "";
+                Write-Output "Retrieving $nodejsBinUrl"
+                Invoke-WebRequest $nodejsBinUrl -o $destZipFile
+            }
 
             Add-Type -Assembly System.IO.Compression.FileSystem
             $zip = [IO.Compression.ZipFile]::OpenRead($destZipFile)
@@ -154,9 +157,10 @@ New-ItemProperty -Path "HKCU:\Environment" -Name "NVM_HOME" -Value "$NVM_HOME" -
 # use setx once so it broadcasts WM_SETTINGCHANGE message
 setx.exe NVM_LINK "$Env:USERPROFILE\nodejs" | Out-Null
 
-$nvmZipUrl = "https://github.com/jchip/nvmw/archive/1.0.1.zip"
-$nvmDestZipFile = "$NVM_CACHE\1.0.1.zip"
+$nvmZipUrl = "https://github.com/jchip/nvmw/archive/v1.0.1.zip"
+$nvmDestZipFile = "$NVM_CACHE\nvmw-v1.0.1.zip"
 
+Write-Output "Retrieving $nvmZipUrl"
 Invoke-WebRequest $nvmZipUrl -o $nvmDestZipFile
 
 $installFiles = @( "bin", "dist", "package.json" )
@@ -182,3 +186,7 @@ ForEach-Object {
     }
 }
 $zip.Dispose()
+
+nvmw.cmd install 10.16.0
+
+# Write-Output "NVMW installed, now type 'nvmw install 10.16.0' to install Node.js"
