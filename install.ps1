@@ -44,7 +44,11 @@ function Get-NodeJS($version) {
             }
             $zipFile="node-$version-win-x64.zip"
             $nodejsBinUrl="$nodejsMirror/$version/$zipFile"
-            $destZipFile="$NVM_HOME\$zipFile"
+            $cacheDir="$NVM_CACHE\$version"
+            if ( -not (Test-Path $cacheDir)) {
+                New-Item -Path "$cacheDir" -ItemType "directory" | Out-Null
+            }
+            $destZipFile="$cacheDir\node.zip"
             "";"";"";"";"";"";
             Write-Output "Retrieving $nodejsBinUrl"
             Invoke-WebRequest $nodejsBinUrl -o $destZipFile
@@ -114,7 +118,8 @@ if ( Test-Path Env:NVM_HOME ) {
     Write-Output "Selected folder for NVM_HOME $NVM_HOME"
 }
 
-$NVM_NODE="$NVM_HOME\node"
+$NVM_CACHE="$NVM_HOME\cache"
+$NVM_NODE="$NVM_HOME\nodejs"
 $NVM_NODE_BIN="$NVM_NODE\node.exe"
 
 if ( -not (Test-Path $NVM_NODE_BIN ) ) {
