@@ -8,9 +8,19 @@ This is a simple Node Version Manager for Windows
 Start a Windows PowerShell terminal and run the following:
 
 ```ps
+cd $Env:USERPROFILE
+$Env:NVM_HOME="$Env:USERPROFILE\nvmw"
 Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvmw/master/install.ps1 -o install.ps1
 install.ps1
 ```
+
+This will install nvmw and Node.js v10.16.0 to directory `nvmw` under your home directory.  
+
+If you want to install this under another directory, then set it different for `$Env:NVM_HOME`.
+
+If you don't set it, then a Directory Browser dialog will be opened for you to choose a directory.
+
+Remember to run `del install.ps1` after it's done.
 
 ## Usage
 
