@@ -1,3 +1,7 @@
+## 1.0.1 June 14, 2019
+
+* Add PowerShell auto install script
+
 ## 1.0.0 October 08, 2018
 
 * Upgrade the install logic
