@@ -1,0 +1,22 @@
+$Env:NVM_POWERSHELL = 1
+
+Try {
+    $NODE_EXE = "$PSScriptRoot\..\node.exe"
+    if ( -not (Test-Path $NODE_EXE)) {
+        $NODE_EXE = node
+    }
+
+    $NVM_JS = "$PSScriptRoot\..\dist\nvmw.js"
+
+    & $NODE_EXE $NVM_JS $args[0] $args[1]
+}
+Finally {
+    Remove-Item Env:\NVM_POWERSHELL
+}
+
+$nvmwEnv = "$Env:TMP\nvmw_env.ps1"
+
+if ( Test-Path $nvmwEnv ) {
+    & $nvmwEnv
+    Remove-Item -Path $nvmwEnv
+}

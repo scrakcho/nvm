@@ -52,9 +52,5 @@ nvmw -h
     nvmw use v10.16.0
 ```
 
-## Notes
-
-* It only works in Windows CMD.
-
 ## License
 [MIT](http://www.opensource.org/licenses/MIT)

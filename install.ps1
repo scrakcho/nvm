@@ -26,6 +26,8 @@ function Find-Folders {
     $browse.Dispose()
 }
 
+$DefaultNodeVersion = "v10.16.0"
+
 function Get-NodeJS($version) {
     if ( -not (Test-Path $NVM_NODE_EXE) ) {
         Try {
@@ -128,7 +130,7 @@ $NVM_BIN = "$NVM_HOME\bin"
 $NVM_NODE_EXE = "$NVM_HOME\node.exe"
 
 if ( -not (Test-Path $NVM_NODE_EXE ) ) {
-    Get-NodeJS "v10.16.0"
+    Get-NodeJS $DefaultNodeVersion
 }
 
 function Update-UserPath ($dirsToAdd) {
@@ -157,36 +159,46 @@ New-ItemProperty -Path "HKCU:\Environment" -Name "NVM_HOME" -Value "$NVM_HOME" -
 # use setx once so it broadcasts WM_SETTINGCHANGE message
 setx.exe NVM_LINK "$Env:USERPROFILE\nodejs" | Out-Null
 
-$nvmZipUrl = "https://github.com/jchip/nvmw/archive/v1.0.1.zip"
-$nvmDestZipFile = "$NVM_CACHE\nvmw-v1.0.1.zip"
+function installNvmw() {
+    $nvmZipUrl = "https://github.com/jchip/nvmw/archive/v1.0.1.zip"
+    $nvmDestZipFile = "$NVM_CACHE\nvmw-v1.0.1.zip"
 
-Write-Output "Retrieving $nvmZipUrl"
-Invoke-WebRequest $nvmZipUrl -o $nvmDestZipFile
+    Write-Output "Retrieving $nvmZipUrl"
+    Invoke-WebRequest $nvmZipUrl -o $nvmDestZipFile
 
-$installFiles = @( "bin", "dist", "package.json" )
+    $installFiles = @( "bin", "dist", "package.json" )
 
-Add-Type -Assembly System.IO.Compression.FileSystem
-$zip = [IO.Compression.ZipFile]::OpenRead($nvmDestZipFile)
-$zip.Entries |  
-ForEach-Object { 
-    $f = $_.FullName.split("/")
-    $f = $f[1..($f.count - 1)]
-    $name = [String]::Join("\", $f)
-    if ( $installFiles -contains $f[0] ) {
+    Add-Type -Assembly System.IO.Compression.FileSystem
+    $zip = [IO.Compression.ZipFile]::OpenRead($nvmDestZipFile)
+    $zip.Entries |  
+    ForEach-Object { 
+        $f = $_.FullName.split("/")
+        $f = $f[1..($f.count - 1)]
+        $name = [String]::Join("\", $f)
+        if ( $installFiles -contains $f[0] ) {
 
-        $fullName = "$NVM_HOME\$name"
-        if ( $_.Name -eq "" ) {
-            if ( -not (Test-Path "$fullName")) {
-                New-Item -Path "$fullName" -ItemType "directory" | Out-Null
+            $fullName = "$NVM_HOME\$name"
+            if ( $_.Name -eq "" ) {
+                if ( -not (Test-Path "$fullName")) {
+                    New-Item -Path "$fullName" -ItemType "directory" | Out-Null
+                }
+            }
+            else {
+                [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$fullName", $true) 
             }
         }
-        else {
-            [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$fullName", $true) 
-        }
     }
+    $zip.Dispose()
 }
-$zip.Dispose()
 
-nvmw.cmd install 10.16.0
+if ( Test-Path $PSScriptRoot\test.ps1 ) {
+    & $PSScriptRoot\test.ps1
+}
+else {
+    installNvmw
+}
 
-# Write-Output "NVMW installed, now type 'nvmw install 10.16.0' to install Node.js"
+& nvmw.ps1 install $DefaultNodeVersion
+& nvmw.ps1 use $DefaultNodeVersion
+
+Write-Output "NVMW installed, Node.js $DefaultNodeVersion activated."
