@@ -1,5 +1,4 @@
-nvm
-===
+# nvm
 
 This is a simple Node Version Manager for Windows
 
@@ -23,28 +22,25 @@ If you don't set it, then it will check `$Env:NVM_HOME`, and if non-existent, th
 ## Usage
 
 ```
-nvm -h
+Usage: nvm <command> [options]
 
-  Usage: nvm [options] [command]
+Commands:
+  nvm install <version>    install the given version of Node
+  nvm uninstall <version>  uninstall the given version of Node
+  nvm use <version>        use the given version of Node in current shell
+  nvm stop                 undo effects of nvm in current shell
+  nvm link <version>       permanently link the version of Node as default
+  nvm unlink               permanently unlink the default version
+  nvm ls                   list the installed all Nodes
+  nvm ls-remote            list remote versions available for install
+  nvm cleanup              remove stale local caches
 
-  Commands:
+Options:
+  --version, -V, -v  Show version number
+  --help, -?, -h     Show help. Add a command to show its help          [string]
 
-    install <version>      install the given version of Node
-    uninstall <version>    uninstall the given version of Node
-    use <version>          use the given version of Node in current shell
-    deactivate             undo effects of nvm in current shell
-    switch <version>       permanently use the given version of Node as default
-    switch-deactivate      permanently undo effects of nvm
-    ls                     list the installed all Nodes
-    ls-remote              list remote versions available for install
-    cleanup                remove stale local caches
 
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-
-  Examples:
+Examples:
 
     nvm install v10.16.0
     nvm uninstall v12.4.0
@@ -52,4 +48,5 @@ nvm -h
 ```
 
 ## License
+
 [MIT](http://www.opensource.org/licenses/MIT)
