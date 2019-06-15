@@ -3,7 +3,7 @@ param (
     [string]$nvmlink
 )
 
-$nvmVersion = "v1.0.2";
+$nvmVersion = "v1.0.3";
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -266,7 +266,7 @@ if ( -not (Test-Path Env:\NVM_USE) ) {
 }
 
 if ( -not (Test-Path $NVM_LINK)) {
-    & nvm.ps1 switch $DefaultNodeVersion
+    & nvm.ps1 link $DefaultNodeVersion
 }
 
 Write-Output "NVM installed, Node.js $DefaultNodeVersion activated."
