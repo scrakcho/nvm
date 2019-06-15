@@ -261,6 +261,8 @@ else {
 
 & nvm.ps1 install $DefaultNodeVersion
 & nvm.ps1 use $DefaultNodeVersion
-& nvm.ps1 switch $DefaultNodeVersion
+if ( -not (Test-Path $NVM_LINK)) {
+    & nvm.ps1 switch $DefaultNodeVersion
+}
 
 Write-Output "NVM installed, Node.js $DefaultNodeVersion activated."
