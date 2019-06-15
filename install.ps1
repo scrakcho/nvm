@@ -30,51 +30,82 @@ function Find-Folders {
     }
     $browse.SelectedPath
     $browse.Dispose()
+} 
+
+
+function getLtsVersion() {
+    $nodejsOrg = "https://nodejs.org"
+    $nodejsHtml = "$Env:TMP\nodejs.html"
+    $foundVersion = "v10.16.0"
+
+    Try {
+        Invoke-WebRequest $nodejsOrg -o $nodejsHtml
+        $M = Select-String -CaseSensitive -Path $nodejsHtml -Pattern 'Download[ *](.+)[ *]LTS' 
+
+        $G = $M.Matches.Groups[1]
+        if ($G.Success) {
+            $v = $G.Value
+            if (-not ($v.StartsWith("v"))) {
+                $v = "v" + $v
+            }
+            $foundVersion = $v
+        }
+    }
+    Catch {
+    }
+
+    return $foundVersion
 }
 
-$DefaultNodeVersion = "v10.16.0"
+$DefaultNodeVersion = getLtsVersion
 
 function Get-NodeJS($version) {
-    if ( -not (Test-Path $NVM_NODE_EXE) ) {
-        Try {
-            if ( -not (Test-Path $NVM_NODE )) {
-                New-Item -Path "$NVM_NODE" -ItemType "directory" | Out-Null
-            }
-
-            if ( Test-Path Env:NVM_NODEJS_ORG_MIRROR ) {
-                $nodejsMirror = $Env:NVM_NODEJS_ORG_MIRROR
-                Write-Output "Using Env:NVM_NODEJS_ORG_MIRROR $nodejsMirror"
-            }
-            else {
-                $nodejsMirror = "https://nodejs.org/dist"
-            }
-            $zipFile = "node-$version-win-x64.zip"
-            $nodejsBinUrl = "$nodejsMirror/$version/$zipFile"
-            $cacheDir = "$NVM_CACHE\$version"
-            if ( -not (Test-Path $cacheDir)) {
-                New-Item -Path "$cacheDir" -ItemType "directory" | Out-Null
-            }
-            $destZipFile = "$cacheDir\node.zip"
-
-            if ( -not (Test-Path "$destZipFile")) {
-                ""; ""; ""; ""; ""; "";
-                Write-Output "Retrieving $nodejsBinUrl"
-                Invoke-WebRequest $nodejsBinUrl -o $destZipFile
-            }
-
-            Add-Type -Assembly System.IO.Compression.FileSystem
-            $zip = [IO.Compression.ZipFile]::OpenRead($destZipFile)
-            $zip.Entries | Where-Object { $_.Name -like 'node.exe' } | 
-            ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$NVM_NODE_EXE", $true) }
-            $zip.Dispose()
-
-            # Expand-Archive "$destZipFile" $NVM_HOME\node
-            # Remove-Item "$destZipFile"
+    Try {
+        if ( -not (Test-Path $NVM_NODE )) {
+            New-Item -Path "$NVM_NODE" -ItemType "directory" | Out-Null
         }
-        Catch {
-            Write-Error -Message "Retrieving node version $version binary failed  $_.Exception.Message"
-            exit
+
+        if ( Test-Path Env:NVM_NODEJS_ORG_MIRROR ) {
+            $nodejsMirror = $Env:NVM_NODEJS_ORG_MIRROR
+            Write-Output "Using Env:NVM_NODEJS_ORG_MIRROR $nodejsMirror"
         }
+        else {
+            $nodejsMirror = "https://nodejs.org/dist"
+        }
+
+        if ([System.Environment]::Is64BitOperatingSystem) {
+            $arch = "x64"
+        }
+        else {
+            $arch = "x86"
+        }
+        
+        $zipFile = "node-$version-win-$arch.zip"
+        $nodejsBinUrl = "$nodejsMirror/$version/$zipFile"
+        $cacheDir = "$NVM_CACHE\$version"
+        if ( -not (Test-Path $cacheDir)) {
+            New-Item -Path "$cacheDir" -ItemType "directory" | Out-Null
+        }
+        $destZipFile = "$cacheDir\node.zip"
+
+        if ( -not (Test-Path "$destZipFile")) {
+            ""; ""; ""; ""; ""; "";
+            Write-Output "Retrieving $nodejsBinUrl"
+            Invoke-WebRequest $nodejsBinUrl -o $destZipFile
+        }
+
+        Add-Type -Assembly System.IO.Compression.FileSystem
+        $zip = [IO.Compression.ZipFile]::OpenRead($destZipFile)
+        $zip.Entries | Where-Object { $_.Name -like 'node.exe' } | 
+        ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$NVM_NODE_EXE", $true) }
+        $zip.Dispose()
+
+        # Expand-Archive "$destZipFile" $NVM_HOME\node
+        # Remove-Item "$destZipFile"
+    }
+    Catch {
+        Write-Error -Message "Retrieving node version $version binary failed  $_.Exception.Message"
+        exit
     }
 }
 
@@ -128,7 +159,7 @@ function Compare-Path {
 }
 
 if ( $nvmhome -ne "" ) {
-    $NVM_HOME=$nvmhome
+    $NVM_HOME = $nvmhome
     Write-Output "Got NVM_HOME $NVM_HOME from command line"
 }
 elseif ( Test-Path Env:NVM_HOME ) {
@@ -146,7 +177,7 @@ $NVM_BIN = "$NVM_HOME\bin"
 $NVM_NODE_EXE = "$NVM_HOME\node.exe"
 
 if ( $nvmlink -ne "" ) {
-    $NVM_LINK=$nvmlink
+    $NVM_LINK = $nvmlink
     Write-Output "Got NVM_LINK $NVM_LINK from command line"
 }
 elseif ( Test-Path Env:NVM_LINK ) {
@@ -158,7 +189,14 @@ else {
     Write-Output "Default NVM_LINK to $NVM_LINK"
 }
 
-if ( -not (Test-Path $NVM_NODE_EXE ) ) {
+Try {
+    $existNodejsVersion = & $NVM_NODE_EXE -v
+}
+Catch {
+    $existNodejsVersion = "bad"
+}
+
+if ( -not ($DefaultNodeVersion -eq $existNodejsVersion) ) {
     Get-NodeJS $DefaultNodeVersion
 }
 
@@ -171,7 +209,7 @@ function Add-UserPath ($dirsToAdd) {
 }
 
 $dirsToAdd = Compare-Path -Directory @( "$NVM_BIN", "$NVM_LINK" ) -Path $Env:Path
-$Env:Path=[String]::Join(";", ($Env:Path.Split(";") + $dirsToAdd).Where({ $_ -ne "" }))
+$Env:Path = [String]::Join(";", ($Env:Path.Split(";") + $dirsToAdd).Where( { $_ -ne "" }))
 
 $userDirsToAdd = Compare-Path -Directory @( "$NVM_BIN", "$NVM_LINK" ) -Path $RegPath
 Add-UserPath $userDirsToAdd
