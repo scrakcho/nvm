@@ -260,7 +260,11 @@ else {
 }
 
 & nvm.ps1 install $DefaultNodeVersion
-& nvm.ps1 use $DefaultNodeVersion
+
+if ( -not (Test-Path Env:\NVM_USE) ) {
+    & nvm.ps1 use $DefaultNodeVersion
+}
+
 if ( -not (Test-Path $NVM_LINK)) {
     & nvm.ps1 switch $DefaultNodeVersion
 }
