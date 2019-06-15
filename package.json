@@ -1,7 +1,7 @@
 {
   "name": "nvm",
   "description": "Node version manager for Windows and *nix",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Tom.Huang <hzlhu.dargon@gmail.com>",
   "contributors": [
     "Joel Chen <joel123@gmail.com>"

@@ -3,6 +3,7 @@ param (
     [string]$nvmlink
 )
 
+$nvmVersion = "v1.0.2";
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -182,8 +183,8 @@ New-ItemProperty -Path "HKCU:\Environment" -Name "NVM_HOME" -Value "$NVM_HOME" -
 setx.exe NVM_LINK "$NVM_LINK" | Out-Null
 
 function installNvm() {
-    $nvmZipUrl = "https://github.com/jchip/nvm/archive/v1.0.1.zip"
-    $nvmDestZipFile = "$NVM_CACHE\nvm-v1.0.1.zip"
+    $nvmZipUrl = "https://github.com/jchip/nvm/archive/$nvmVersion.zip"
+    $nvmDestZipFile = "$NVM_CACHE\nvm-$nvmVersion.zip"
 
     Write-Output "Retrieving $nvmZipUrl"
     Invoke-WebRequest $nvmZipUrl -o $nvmDestZipFile
