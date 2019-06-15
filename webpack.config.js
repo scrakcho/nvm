@@ -5,7 +5,7 @@ const webpack = require("webpack");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const base = {
-  mode: "development",
+  mode: "production",
   //devtool: "source-map",
   entry: {
     "nvm.js": Path.resolve("lib/cli.js")
