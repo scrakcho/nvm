@@ -1,6 +1,8 @@
 # nvm
 
-This is a simple Node Version Manager for Windows
+This is a simple Node Version Manager for Windows.
+
+Tested on Windows 10.
 
 ## Installation
 
@@ -13,7 +15,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/master/install.ps1
 del install.ps1
 ```
 
-This will install nvm and Node.js v10.16.0 to directory `nvm` under your home specified by `$Env:USERPROFILE`.
+This will install nvm and current LTS Node.js (v10.16.0) to directory `nvm` under your home specified by `$Env:USERPROFILE`.
 
 If you want to install this under another directory, then set it different for the param `-nvmhome`.
 
