@@ -144,7 +144,8 @@ function Compare-Path {
     )
   
     PROCESS {
-        $Path = $Path.Split(';').Where( { $_ -ne "" })
+        $Path = $Path.Split(';')
+        $Path = $Path.Where( { $_ -ne "" })
         $dirsToAdd = @()
 
         foreach ($dir in $Directory) {
