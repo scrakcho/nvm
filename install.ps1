@@ -77,6 +77,13 @@ function Get-NodeJS($version) {
     }
 }
 
+Try {
+    $RegPath = Get-ItemPropertyValue -Path "HKCU:\Environment" -Name Path 
+}
+Catch {
+    $RegPath = ""
+}
+
 function Compare-Path {
     <#
       .SYNOPSIS
@@ -98,11 +105,12 @@ function Compare-Path {
             ValueFromPipelineByPropertyName = $True,
             HelpMessage = 'What directory would you like to add?')]
         [Alias('dir')]
-        [string[]]$Directory
+        [string[]]$Directory,
+        [string[]]$Path = $Env:PATH
     )
   
     PROCESS {
-        $Path = $env:PATH.Split(';').Where( { $_ -ne "" })
+        $Path = $Path.Split(';').Where( { $_ -ne "" })
         $dirsToAdd = @()
 
         foreach ($dir in $Directory) {
@@ -114,8 +122,6 @@ function Compare-Path {
             }
         }
   
-        #   $newPath = [String]::Join(';', $Path)
-        #   $Env:Path="$newPath"
         return $dirsToAdd
     }
 }
@@ -155,25 +161,19 @@ if ( -not (Test-Path $NVM_NODE_EXE ) ) {
     Get-NodeJS $DefaultNodeVersion
 }
 
-function Update-UserPath ($dirsToAdd) {
-    if ($dirsToAdd.count -gt 0) {
-        if ( Test-Path "HKCU:\Environment\Path" ) {
-            $RegPath = Get-ItemPropertyValue -Path "HKCU:\Environment" -Name Path 
-        }
-        else {
-            $RegPath = ""
-        }
-        # Update current shell's full path
-        $Env:Path = [String]::Join(";", ($Env:Path.Split(";") + $dirsToAdd).Where( { $_ -ne "" }))
-    
+function Add-UserPath ($dirsToAdd) {
+    if ($dirsToAdd.count -gt 0) {    
         # Update user's path in registry
-        $RegPath = [String]::Join(";", ($RegPath.split(";") + $dirsToAdd).Where( { $_ -ne "" }))
-        New-ItemProperty -Path "HKCU:\Environment" -Name "Path" -Value "$RegPath" -Force | Out-Null
+        $newRegPath = [String]::Join(";", ($RegPath.split(";") + $dirsToAdd).Where( { $_ -ne "" }))
+        New-ItemProperty -Path "HKCU:\Environment" -Name "Path" -Value "$newRegPath" -Force | Out-Null
     }    
 }
 
-$dirsToAdd = Compare-Path -Directory @( "$NVM_BIN", "$NVM_LINK" )
-Update-UserPath $dirsToAdd
+$dirsToAdd = Compare-Path -Directory @( "$NVM_BIN", "$NVM_LINK" ) -Path $Env:Path
+$Env:Path=[String]::Join(";", ($Env:Path.Split(";") + $dirsToAdd).Where({ $_ -ne "" }))
+
+$userDirsToAdd = Compare-Path -Directory @( "$NVM_BIN", "$NVM_LINK" ) -Path $RegPath
+Add-UserPath $userDirsToAdd
 
 $Env:NVM_LINK = "$NVM_LINK"
 $Env:NVM_HOME = $NVM_HOME
