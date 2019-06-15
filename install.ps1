@@ -3,6 +3,8 @@ param (
     [string]$nvmlink
 )
 
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 $nvmVersion = "v1.0.3";
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
