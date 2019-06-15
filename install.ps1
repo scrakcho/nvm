@@ -39,7 +39,7 @@ function getLtsVersion() {
     $foundVersion = "v10.16.0"
 
     Try {
-        Invoke-WebRequest $nodejsOrg -o $nodejsHtml
+        Invoke-WebRequest $nodejsOrg -OutFile $nodejsHtml
         $M = Select-String -CaseSensitive -Path $nodejsHtml -Pattern 'Download[ *](.+)[ *]LTS' 
 
         $G = $M.Matches.Groups[1]
@@ -91,7 +91,7 @@ function Get-NodeJS($version) {
         if ( -not (Test-Path "$destZipFile")) {
             ""; ""; ""; ""; ""; "";
             Write-Output "Retrieving $nodejsBinUrl"
-            Invoke-WebRequest $nodejsBinUrl -o $destZipFile
+            Invoke-WebRequest $nodejsBinUrl -OutFile $destZipFile
         }
 
         Add-Type -Assembly System.IO.Compression.FileSystem
@@ -225,7 +225,7 @@ function installNvm() {
     $nvmDestZipFile = "$NVM_CACHE\nvm-$nvmVersion.zip"
 
     Write-Output "Retrieving $nvmZipUrl"
-    Invoke-WebRequest $nvmZipUrl -o $nvmDestZipFile
+    Invoke-WebRequest $nvmZipUrl -OutFile $nvmDestZipFile
 
     $installFiles = @( "bin", "dist", "package.json" )
 

@@ -10,7 +10,7 @@ Start a Windows PowerShell terminal and run the following: (copy and paste into 
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/master/install.ps1 -o install.ps1;
+Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/master/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
