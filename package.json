@@ -3,6 +3,9 @@
   "description": "Node version manager for Windows",
   "version": "1.0.1",
   "author": "Tom.Huang <hzlhu.dargon@gmail.com>",
+  "contributors": [
+    "Joel Chen <joel123@gmail.com>"
+  ],
   "scripts": {
     "build": "webpack",
     "release": "webpack && node pack.js"
@@ -32,8 +35,5 @@
     "manager",
     "widnows"
   ],
-  "bin": {
-    "nvmw": "./bin/nvmw.cmd"
-  },
-  "repository": "git://github.com/nanjingboy/nvmw"
+  "repository": "git://github.com/jchip/nvmw"
 }
