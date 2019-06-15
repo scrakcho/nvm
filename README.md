@@ -6,6 +6,8 @@ Tested on Windows 10.
 
 ## Installation
 
+### Windows
+
 Start a Windows PowerShell terminal and run the following: (copy and paste into shell and press enter)
 
 ```ps
@@ -15,11 +17,23 @@ Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/master/install.ps1
 del install.ps1
 ```
 
-This will install nvm and current LTS Node.js (v10.16.0) to directory `nvm` under your home specified by `$Env:USERPROFILE`.
+- This will install nvm and current LTS Node.js (v10.16.0) to directory `nvm` under your home specified by `$Env:USERPROFILE`.
 
-If you want to install this under another directory, then set it different for the param `-nvmhome`.
+- If you want to install this under another directory, then set it different for the param `-nvmhome`.
 
-If you don't set it, then it will check `$Env:NVM_HOME`, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
+- If you don't set it, then it will check `$Env:NVM_HOME`, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
+
+#### Troubleshooting
+
+- **_install.ps1 cannot be loaded because running scripts is disabled on this system._**
+
+> You need to run PowerShell as administrator and `Set-ExecutionPolicy` to `RemoteSigned` first, and then start a normal PowerShell to run the install script.
+>
+> ie: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned`
+>
+> See this [StackOverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for details.
+>
+> You need to keep this policy if you want to use `nvm` in PowerShell to switch node.js versions.
 
 ## Usage
 
