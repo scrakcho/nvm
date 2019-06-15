@@ -12,23 +12,11 @@ IF NOT EXIST "%NODE_EXE%" (
 
 ENDLOCAL
 
-IF "%1" == "use" (
-  CALL :set_enviroment %1
-) ELSE IF "%1" == "deactivate" (
-  CALL :set_enviroment %1
-) ELSE IF "%1" == "switch" (
-  CALL :set_enviroment %1
-) ELSE IF "%1" == "switch-deactivate" (
-  CALL :set_enviroment %1
-)
-EXIT /b %ERRORLEVEL%
+IF not %ERRORLEVEL% == 0 EXIT /b %ERRORLEVEL%
 
-:set_enviroment
-  IF %ERRORLEVEL% == 0 (
-      IF "%1" == "switch" (
-        "%HOMEDRIVE%\%HOMEPATH%\cmd_auto_run.cmd"
-      ) ELSE (
-        "%TMP%\nvm_env.cmd"
-      )
-  )
-EXIT /b 0
+IF not exist "%TMP%\nvm_env.cmd" EXIT /b 0
+
+IF exist "%TMP%\nvm_envx.cmd" del "%TMP%\nvm_envx.cmd"
+ren "%TMP%\nvm_env.cmd" "nvm_envx.cmd"
+"%TMP%\nvm_envx.cmd"
+del "%TMP%\nvm_envx.cmd"
