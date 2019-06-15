@@ -15,8 +15,7 @@
     "mkdirp": "*",
     "request": "*",
     "rmdir": "*",
-    "lodash": "^4.17.11",
-    "winreg": "*"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

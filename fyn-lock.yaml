@@ -5271,14 +5271,6 @@ which-module:
  2.0.0:
   $: sha1-2e8H3Od7mQK4o6j6SzHD4/fm6Ho=
   _: 'https://registry.npmjs.org/which-module/-/which-module-2.0.0.tgz'
-winreg:
- _latest: 1.2.4
- _:
-  '*': 1.2.4
- 1.2.4:
-  top: 1
-  $: sha1-ugZWKbepJRMOFXeRCM9UCZDpjRs=
-  _: 'https://registry.npmjs.org/winreg/-/winreg-1.2.4.tgz'
 worker-farm:
  _latest: 1.7.0
  _:
