@@ -9,7 +9,7 @@ function Find-Folders {
     $browse = New-Object System.Windows.Forms.FolderBrowserDialog
     $browse.SelectedPath = "$Env:HOMEDRIVE$Env:HOMEPATH"
     $browse.ShowNewFolderButton = $false
-    $browse.Description = "Select or create a directory for NVMW HOME"
+    $browse.Description = "Select or create a directory for NVM HOME"
 
     $loop = $true
     while ($loop) {
@@ -181,9 +181,9 @@ New-ItemProperty -Path "HKCU:\Environment" -Name "NVM_HOME" -Value "$NVM_HOME" -
 # use setx once so it broadcasts WM_SETTINGCHANGE message
 setx.exe NVM_LINK "$NVM_LINK" | Out-Null
 
-function installNvmw() {
-    $nvmZipUrl = "https://github.com/jchip/nvmw/archive/v1.0.1.zip"
-    $nvmDestZipFile = "$NVM_CACHE\nvmw-v1.0.1.zip"
+function installNvm() {
+    $nvmZipUrl = "https://github.com/jchip/nvm/archive/v1.0.1.zip"
+    $nvmDestZipFile = "$NVM_CACHE\nvm-v1.0.1.zip"
 
     Write-Output "Retrieving $nvmZipUrl"
     Invoke-WebRequest $nvmZipUrl -o $nvmDestZipFile
@@ -217,10 +217,10 @@ if ( Test-Path $PSScriptRoot\test.ps1 ) {
     & $PSScriptRoot\test.ps1
 }
 else {
-    installNvmw
+    installNvm
 }
 
-& nvmw.ps1 install $DefaultNodeVersion
-& nvmw.ps1 use $DefaultNodeVersion
+& nvm.ps1 install $DefaultNodeVersion
+& nvm.ps1 use $DefaultNodeVersion
 
-Write-Output "NVMW installed, Node.js $DefaultNodeVersion activated."
+Write-Output "NVM installed, Node.js $DefaultNodeVersion activated."

@@ -1,5 +1,5 @@
-nvmw
-====
+nvm
+===
 
 This is a simple Node Version Manager for Windows
 
@@ -9,12 +9,12 @@ Start a Windows PowerShell terminal and run the following: (copy and paste into 
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvmw/master/install.ps1 -o install.ps1;
-.\install.ps1 -nvmhome $Env:USERPROFILE\nvmw;
+Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/master/install.ps1 -o install.ps1;
+.\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
 
-This will install nvmw and Node.js v10.16.0 to directory `nvmw` under your home specified by `$Env:USERPROFILE`.
+This will install nvm and Node.js v10.16.0 to directory `nvm` under your home specified by `$Env:USERPROFILE`.
 
 If you want to install this under another directory, then set it different for the param `-nvmhome`.
 
@@ -23,18 +23,18 @@ If you don't set it, then it will check `$Env:NVM_HOME`, and if non-existent, th
 ## Usage
 
 ```
-nvmw -h
+nvm -h
 
-  Usage: nvmw [options] [command]
+  Usage: nvm [options] [command]
 
   Commands:
 
     install <version>      install the given version of Node
     uninstall <version>    uninstall the given version of Node
     use <version>          use the given version of Node in current shell
-    deactivate             undo effects of nvmw in current shell
+    deactivate             undo effects of nvm in current shell
     switch <version>       permanently use the given version of Node as default
-    switch-deactivate      permanently undo effects of nvmw
+    switch-deactivate      permanently undo effects of nvm
     ls                     list the installed all Nodes
     ls-remote              list remote versions available for install
     cleanup                remove stale local caches
@@ -46,9 +46,9 @@ nvmw -h
 
   Examples:
 
-    nvmw install v10.16.0
-    nvmw uninstall v12.4.0
-    nvmw use v10.16.0
+    nvm install v10.16.0
+    nvm uninstall v12.4.0
+    nvm use v10.16.0
 ```
 
 ## License

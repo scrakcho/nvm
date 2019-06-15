@@ -8,7 +8,7 @@ IF NOT EXIST "%NODE_EXE%" (
   SET "NODE_EXE=node"
 )
 
-"%NODE_EXE%" "%~dp0\..\dist\nvmw.js" %1 %2
+"%NODE_EXE%" "%~dp0\..\dist\nvm.js" %1 %2
 
 ENDLOCAL
 
@@ -28,7 +28,7 @@ EXIT /b %ERRORLEVEL%
       IF "%1" == "switch" (
         "%HOMEDRIVE%\%HOMEPATH%\cmd_auto_run.cmd"
       ) ELSE (
-        "%TMP%\nvmw_env.cmd"
+        "%TMP%\nvm_env.cmd"
       )
   )
 EXIT /b 0

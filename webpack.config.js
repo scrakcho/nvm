@@ -8,7 +8,7 @@ const base = {
   mode: "development",
   //devtool: "source-map",
   entry: {
-    "nvmw.js": Path.resolve("lib/cli.js")
+    "nvm.js": Path.resolve("lib/cli.js")
   },
   plugins: [
     new webpack.BannerPlugin({

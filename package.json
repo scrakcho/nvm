@@ -1,6 +1,6 @@
 {
-  "name": "nvmw",
-  "description": "Node version manager for Windows",
+  "name": "nvm",
+  "description": "Node version manager for Windows and *nix",
   "version": "1.0.1",
   "author": "Tom.Huang <hzlhu.dargon@gmail.com>",
   "contributors": [
@@ -33,7 +33,9 @@
     "Node",
     "version",
     "manager",
+    "unix",
+    "*nix",
     "widnows"
   ],
-  "repository": "git://github.com/jchip/nvmw"
+  "repository": "git://github.com/jchip/nvm"
 }
