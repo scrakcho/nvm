@@ -2,11 +2,20 @@
 
 This is a simple Node Version Manager for Windows.
 
-Tested on Windows 10.
+# Table Of Contents
+
+- [Installation](#installation)
+  - [Windows](#windows)
+    - [Troubleshooting](#troubleshooting)
+    - [Windows 7 Updates](#windows-7-updates)
+- [Usage](#usage)
+- [License](#license)
 
 ## Installation
 
 ### Windows
+
+Tested on Windows 10, 8.1, and 7. Windows 7 requires PowerShell updates, see [update instructions](#windows-7-updates).
 
 Start a Windows PowerShell terminal and run the following: (copy and paste into shell and press enter)
 
@@ -34,6 +43,22 @@ del install.ps1
 > See this [StackOverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for details.
 >
 > You need to keep this policy if you want to use `nvm` in PowerShell to switch node.js versions.
+
+#### Windows 7 Updates
+
+PowerShell version 4+ is required.
+
+For Windows 7, you can update it to version 5.1 with the following instructions:
+
+1. Go to <https://www.microsoft.com/en-us/download/details.aspx?id=54616>
+2. Click Red Download button
+3. Download `Win7AndW2K8R2-KB3191566-x64.zip` or `Win7-KB3191566-x86.zip` for 32-bit
+4. Unzip the file
+5. Run the package `Win7AndW2K8R2-KB3191566-x64.msu` or `Win7-KB3191566-x86.msu` for 32-bit
+
+After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` to check.
+
+> PSVersion should be something like `5.1.#####.####`
 
 ## Usage
 
