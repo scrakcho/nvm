@@ -7,7 +7,7 @@ $ProgressPreference = "SilentlyContinue"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$nvmVersion = "v1.0.5";
+$nvmVersion = "v1.0.6";
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -226,6 +226,11 @@ setx.exe NVM_LINK "$NVM_LINK" | Out-Null
 
 function installNvm() {
     $nvmZipUrl = "https://github.com/jchip/nvm/archive/$nvmVersion.zip"
+
+    if ( -not (Test-Path $NVM_CACHE)) {
+        New-Item -Path "$NVM_CACHE" -ItemType "directory" | Out-Null
+    }
+
     $nvmDestZipFile = "$NVM_CACHE\nvm-$nvmVersion.zip"
 
     Write-Output "Retrieving $nvmZipUrl"
