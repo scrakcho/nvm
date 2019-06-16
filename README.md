@@ -32,6 +32,8 @@ del install.ps1
 
 - If you don't set it, then it will check `$Env:NVM_HOME`, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
 
+[Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
+
 #### Troubleshooting
 
 - **_install.ps1 cannot be loaded because running scripts is disabled on this system._**
@@ -59,6 +61,8 @@ For Windows 7, you can update it to version 5.1 with the following instructions:
 After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` to check.
 
 > PSVersion should be something like `5.1.#####.####`
+
+[Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
 
 ## Usage
 
