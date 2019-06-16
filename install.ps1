@@ -273,4 +273,4 @@ if ( -not (Test-Path $NVM_LINK)) {
     & nvm.ps1 link $DefaultNodeVersion
 }
 
-Write-Output "NVM installed, Node.js $DefaultNodeVersion activated."
+Write-Output "NVM installed, Node.js version $Env:NVM_USE activated."
