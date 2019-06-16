@@ -7,7 +7,7 @@ $ProgressPreference = "SilentlyContinue"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$nvmVersion = "v1.0.4";
+$nvmVersion = "v1.0.5";
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
