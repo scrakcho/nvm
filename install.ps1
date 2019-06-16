@@ -3,6 +3,8 @@ param (
     [string]$nvmlink
 )
 
+$ProgressPreference = "SilentlyContinue"
+
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $nvmVersion = "v1.0.4";
@@ -91,7 +93,6 @@ function Get-NodeJS($version) {
         $destZipFile = "$cacheDir\node.zip"
 
         if ( -not (Test-Path "$destZipFile")) {
-            ""; ""; ""; ""; ""; "";
             Write-Output "Retrieving $nodejsBinUrl"
             Invoke-WebRequest $nodejsBinUrl -OutFile $destZipFile
         }
