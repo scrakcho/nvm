@@ -13,7 +13,8 @@
   "dependencies": {
     "async": "*",
     "colors": "*",
-    "extract-zip": "^1.6.7",
+    "extract-zip": "jchip/extract-zip",
+    "fd-slicer": "jchip/node-fd-slicer",
     "lodash": "^4.17.11",
     "mkdirp": "*",
     "nix-clap": "^1.3.10",
