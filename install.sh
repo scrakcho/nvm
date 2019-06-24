@@ -105,3 +105,25 @@ function installNvm() {
 
 fetchNodeJS "${DEFAULT_NODE_VERSION}"
 installNvm
+
+source "${NVM_HOME}/bin/nvm.sh"
+
+function setBashRc() {
+  BASHRC=~/.bash_profile
+
+  if [ ! -f "${BASHRC}" ]; then
+    touch "${BASHRC}"
+  fi
+
+  local findExist
+  findExist=$(grep "export NVM_HOME=\"$NVM_HOME\"" "${BASHRC}")
+  if [ -z "$findExist" ]; then
+    cat >> "${BASHRC}" <<EOF
+export NVM_HOME="${NVM_HOME}"
+source "\${NVM_HOME}/bin/nvm.sh"
+EOF
+  fi
+  echo "find exist $findExist"
+}
+
+setBashRc
