@@ -115,15 +115,7 @@ function setBashRc() {
     touch "${BASHRC}"
   fi
 
-  local findExist
-  findExist=$(grep "export NVM_HOME=\"$NVM_HOME\"" "${BASHRC}")
-  if [ -z "$findExist" ]; then
-    cat >> "${BASHRC}" <<EOF
-export NVM_HOME="${NVM_HOME}"
-source "\${NVM_HOME}/bin/nvm.sh"
-EOF
-  fi
-  echo "find exist $findExist"
+  ${NVM_NODE_BIN} ${NVM_HOME}/bin/install_bashrc.js "${BASHRC}"
 }
 
 setBashRc

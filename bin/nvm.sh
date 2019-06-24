@@ -13,8 +13,6 @@ function nvm() {
     return 1
   fi
 
-  echo "NVM node found at ${NVM_NODE}"
-
   $NVM_NODE $NVM_HOME/dist/nvm.js $*
 
   if [ -z $TMPDIR ]; then
@@ -27,4 +25,6 @@ function nvm() {
     source $TMPDIR/nvm_envx.sh
     rm -rf $TMPDIR/nvm_envx.sh
   fi
+
+  return 0
 }
