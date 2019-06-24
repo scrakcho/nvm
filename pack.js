@@ -16,6 +16,6 @@ Zipit(
     }
 
     // Handle buffer, which is an instance of Buffer
-    Fs.writeFileSync(`release-${pkg.version}.zip`, buffer);
+    Fs.writeFileSync(`nvm-v${pkg.version}.zip`, buffer);
   }
 );
