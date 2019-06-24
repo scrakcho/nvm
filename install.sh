@@ -3,7 +3,7 @@ NVM_VERSION="v1.0.6"
 function fetch() {
   curl=$(which curl)
   if [ "$?" == "0" ]; then
-    curl $1 -o $2
+    curl -L $1 -o $2
     return $?
   fi
 
@@ -87,4 +87,21 @@ NVM_CACHE="${NVM_HOME}/cache"
 NVM_NODE="${NVM_HOME}/nodejs"
 NVM_NODE_BIN="${NVM_HOME}/node"
 
+function installNvm() {
+  local nvmTgzUrl
+  nvmTgzUrl="https://github.com/jchip/nvm/archive/${NVM_VERSION}.tar.gz"
+  if [ ! -d "${NVM_CACHE}" ]; then
+    mkdir -p "${NVM_CACHE}"
+  fi
+
+  local nvmDestTgzFile
+  nvmDestTgzFile="${NVM_CACHE}/nvm-${NVM_VERSION}.tgz"
+
+  echo "Fetching ${nvmTgzUrl}"
+  fetch "${nvmTgzUrl}" "${nvmDestTgzFile}"
+
+  tar xzf "${nvmDestTgzFile}" --strip=1 --include "*/bin" --include "*/dist" --include "*/package.json" --directory "${NVM_HOME}"
+}
+
 fetchNodeJS "${DEFAULT_NODE_VERSION}"
+installNvm
