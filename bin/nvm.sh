@@ -28,3 +28,9 @@ function nvm() {
 
   return 0
 }
+
+# If a version is linked, then automatically add it to PATH
+
+if [ -d "$NVM_LINK" ] && [ -x "$NVM_LINK/node" ]; then
+  export PATH=$NVM_LINK:$PATH
+fi
