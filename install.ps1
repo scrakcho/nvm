@@ -7,7 +7,8 @@ $ProgressPreference = "SilentlyContinue"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$nvmVersion = "v1.0.6";
+$nvmVersion = "v1.0.7";
+
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -34,7 +35,7 @@ function Find-Folders {
     }
     $browse.SelectedPath
     $browse.Dispose()
-} 
+}
 
 
 function getLtsVersion() {
@@ -44,7 +45,7 @@ function getLtsVersion() {
 
     Try {
         Invoke-WebRequest $nodejsOrg -OutFile $nodejsHtml
-        $M = Select-String -CaseSensitive -Path $nodejsHtml -Pattern 'Download[ *](.+)[ *]LTS' 
+        $M = Select-String -CaseSensitive -Path $nodejsHtml -Pattern 'Download[ *](.+)[ *]LTS'
 
         $G = $M.Matches.Groups[1]
         if ($G.Success) {
@@ -83,7 +84,7 @@ function Get-NodeJS($version) {
         else {
             $arch = "x86"
         }
-        
+
         $zipFile = "node-$version-win-$arch.zip"
         $nodejsBinUrl = "$nodejsMirror/$version/$zipFile"
         $cacheDir = "$NVM_CACHE\$version"
@@ -99,7 +100,7 @@ function Get-NodeJS($version) {
 
         Add-Type -Assembly System.IO.Compression.FileSystem
         $zip = [IO.Compression.ZipFile]::OpenRead($destZipFile)
-        $zip.Entries | Where-Object { $_.Name -like 'node.exe' } | 
+        $zip.Entries | Where-Object { $_.Name -like 'node.exe' } |
         ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$NVM_NODE_EXE", $true) }
         $zip.Dispose()
 
@@ -113,7 +114,7 @@ function Get-NodeJS($version) {
 }
 
 Try {
-    $RegPath = Get-ItemPropertyValue -Path "HKCU:\Environment" -Name Path 
+    $RegPath = Get-ItemPropertyValue -Path "HKCU:\Environment" -Name Path
 }
 Catch {
     $RegPath = ""
@@ -131,7 +132,7 @@ function Compare-Path {
       .PARAMETER Directory
         The name of the directory to compare to the current path.
     #>
-  
+
     [CmdletBinding()]
     param (
         [Parameter(
@@ -143,7 +144,7 @@ function Compare-Path {
         [string[]]$Directory,
         [string[]]$Path = $Env:PATH
     )
-  
+
     PROCESS {
         $Path = $Path.Split(';')
         $Path = $Path.Where( { $_ -ne "" })
@@ -157,7 +158,7 @@ function Compare-Path {
                 $dirsToAdd += $dir
             }
         }
-  
+
         return $dirsToAdd
     }
 }
@@ -205,11 +206,11 @@ if ( -not ($DefaultNodeVersion -eq $existNodejsVersion) ) {
 }
 
 function Add-UserPath ($dirsToAdd) {
-    if ($dirsToAdd.count -gt 0) {    
+    if ($dirsToAdd.count -gt 0) {
         # Update user's path in registry
         $newRegPath = [String]::Join(";", ($RegPath.split(";") + $dirsToAdd).Where( { $_ -ne "" }))
         New-ItemProperty -Path "HKCU:\Environment" -Name "Path" -Value "$newRegPath" -Force | Out-Null
-    }    
+    }
 }
 
 $dirsToAdd = Compare-Path -Directory @( "$NVM_BIN", "$NVM_LINK" ) -Path $Env:Path
@@ -240,8 +241,8 @@ function installNvm() {
 
     Add-Type -Assembly System.IO.Compression.FileSystem
     $zip = [IO.Compression.ZipFile]::OpenRead($nvmDestZipFile)
-    $zip.Entries |  
-    ForEach-Object { 
+    $zip.Entries |
+    ForEach-Object {
         $f = $_.FullName.split("/")
         $f = $f[1..($f.count - 1)]
         $name = [String]::Join("\", $f)
@@ -254,7 +255,7 @@ function installNvm() {
                 }
             }
             else {
-                [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$fullName", $true) 
+                [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$fullName", $true)
             }
         }
     }

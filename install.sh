@@ -1,4 +1,4 @@
-NVM_VERSION="v1.0.6"
+NVM_VERSION="v1.0.7"
 
 if [ -z "${NVM_HOME}" ]; then
   export NVM_HOME="$HOME/nvm"
