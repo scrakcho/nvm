@@ -8,6 +8,7 @@ This is a simple Node Version Manager for Windows.
   - [Windows](#windows)
     - [Troubleshooting](#troubleshooting)
     - [Windows 7 Updates](#windows-7-updates)
+  - [Unix](#unix)
 - [Usage](#usage)
 - [License](#license)
 
@@ -63,6 +64,20 @@ After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` 
 > PSVersion should be something like `5.1.#####.####`
 
 [Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
+
+### Unix
+
+Using cURL and the install script:
+
+```bash
+NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/master/install.sh | bash
+```
+
+or wget:
+
+```bash
+NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/master/install.sh | bash
+```
 
 ## Usage
 
