@@ -1,5 +1,9 @@
 NVM_VERSION="v1.0.6"
 
+if [ -z "${NVM_HOME}" ]; then
+  export NVM_HOME="$HOME/nvm"
+fi
+
 function fetch() {
   curl=$(which curl)
   if [ "$?" == "0" ]; then
