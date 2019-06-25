@@ -1,5 +1,5 @@
 {
-  "name": "nvm",
+  "name": "@jchip/nvm",
   "description": "Node version manager for Windows and *nix",
   "version": "1.0.7",
   "author": "Tom.Huang <hzlhu.dargon@gmail.com>",
@@ -36,7 +36,10 @@
     "manager",
     "unix",
     "*nix",
-    "widnows"
+    "widnows",
+    "nvm",
+    "universal",
+    "universal nvm"
   ],
   "repository": "git://github.com/jchip/nvm"
 }
