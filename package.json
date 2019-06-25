@@ -41,5 +41,11 @@
     "universal",
     "universal nvm"
   ],
+  "files": [
+    "bin",
+    "dist",
+    "install.sh",
+    "install.ps1"
+  ],
   "repository": "git://github.com/jchip/nvm"
 }
