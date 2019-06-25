@@ -7,7 +7,7 @@ fi
 function fetch() {
   curl=$(which curl)
   if [ "$?" == "0" ]; then
-    curl -L $1 -o $2
+    curl --fail -L $1 -o $2
     return $?
   fi
 
@@ -26,22 +26,24 @@ function tmpdir() {
   fi
 }
 
+NODE_JS_ORG="https://nodejs.org"
+
 function getLtsVersion() {
-    NODE_JS_ORG="https://nodejs.org"
     NODE_JS_HTML="$(tmpdir)/nodejs.html"
 
     fetch $NODE_JS_ORG $NODE_JS_HTML
 
     local fv
-    fv=$(egrep "^.*Download[ 0-9\.]+LTS.*$" "$NODE_JS_HTML" | egrep -o "Download[ 0-9\.]+LTS" | egrep -o "[0-9\.]+")
+    fv=$(egrep -o "Download[ 0-9\.]+LTS" "$NODE_JS_HTML" | egrep -o "[0-9\.]+")
 
     if [ -n "$fv" ]; then
       echo "v$fv"
     else
-      echo "v10.15.0"
+      echo "v10.16.0"
     fi
 }
 
+echo "Checking for latest node.js LTS from ${NODE_JS_ORG}"
 DEFAULT_NODE_VERSION=$(getLtsVersion)
 
 function getOs() {
@@ -86,10 +88,17 @@ function fetchNodeJS() {
   if [ ! -f "${destTgzFile}" ]; then
     echo "Fetching ${nodejsBinUrl}"
 
-    curl "${nodejsBinUrl}" -o "${destTgzFile}"
+    if ! fetch "${nodejsBinUrl}" "${destTgzFile}"; then
+      rm -rf "${cacheDir}"
+    fi
   fi
 
-  tar xzf "${destTgzFile}" --strip=2 --directory "${NVM_HOME}" "*/bin/node"
+  if [ -f "${destTgzFile}" ]; then
+    tar xzf "${destTgzFile}" --strip=2 --directory "${NVM_HOME}" "*/bin/node"
+  else
+    echo "Unable to fetch ${nodejsBinUrl}"
+    exit 1
+  fi
 }
 
 NVM_CACHE="${NVM_HOME}/cache"
@@ -128,3 +137,5 @@ function setBashRc() {
 }
 
 setBashRc
+
+nvm install $DEFAULT_NODE_VERSION
