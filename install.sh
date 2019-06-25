@@ -29,12 +29,17 @@ function tmpdir() {
 function getLtsVersion() {
     NODE_JS_ORG="https://nodejs.org"
     NODE_JS_HTML="$(tmpdir)/nodejs.html"
-    FOUND_VERSION="v10.16.0"
 
-# TODO
-#    fetch $NODE_JS_ORG $NODE_JS_HTML
+    fetch $NODE_JS_ORG $NODE_JS_HTML
 
-    echo "$FOUND_VERSION"
+    local fv
+    fv=$(egrep "^.*Download[ 0-9\.]+LTS.*$" "$NODE_JS_HTML" | egrep -o "Download[ 0-9\.]+LTS" | egrep -o "[0-9\.]+")
+
+    if [ -n "$fv" ]; then
+      echo "v$fv"
+    else
+      echo "v10.15.0"
+    fi
 }
 
 DEFAULT_NODE_VERSION=$(getLtsVersion)
