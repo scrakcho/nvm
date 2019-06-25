@@ -5,7 +5,7 @@ param (
 
 $nvmVersion = "1.0.7"
 $nvmVersionV = "v$nvmVersion";
-$DisableInstallNvmFromTgz = $false
+$DisableInstallNvmFromTgz = $true
 
 $NVM_ZIP_URL = "https://github.com/jchip/nvm/archive/$nvmVersionV.zip"
 $NVM_TGZ_URL = "https://registry.npmjs.org/@jchip/nvm/-/nvm-$nvmVersion.tgz"
@@ -237,8 +237,7 @@ function installNvmFromZip() {
         New-Item -Path "$NVM_CACHE" -ItemType "directory" | Out-Null
     }
 
-    $nvmDestZipFile = "$NVM_CACHE\nvm-$nvmVersionV
-.zip"
+    $nvmDestZipFile = "$NVM_CACHE\nvm-$nvmVersionV.zip"
 
     Write-Output "Retrieving $nvmZipUrl"
     Invoke-WebRequest $nvmZipUrl -OutFile $nvmDestZipFile
@@ -275,8 +274,7 @@ function installNvmFromTgz() {
         New-Item -Path "$NVM_CACHE" -ItemType "directory" | Out-Null
     }
 
-    $nvmDestTgzFile = "$NVM_CACHE\nvm-$nvmVersionV
-.tgz"
+    $nvmDestTgzFile = "$NVM_CACHE\nvm-$nvmVersionV.tgz"
 
     Write-Output "Retrieving $nvmTgzUrl"
     Invoke-WebRequest $nvmTgzUrl -OutFile $nvmDestTgzFile
