@@ -126,7 +126,7 @@ function installNvm() {
 */package.json
 EOF
 
-  tar xzf "${nvmDestTgzFile}" --directory="${NVM_HOME}" --strip=1 --files-from="$nvm_files" 
+  tar xzf "${nvmDestTgzFile}" --directory="${NVM_HOME}" --strip=1 --files-from="$nvm_files"
 }
 
 fetchNodeJS "${DEFAULT_NODE_VERSION}"

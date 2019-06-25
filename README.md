@@ -1,6 +1,6 @@
 # nvm
 
-This is a simple Node Version Manager for Windows.
+This is a simple universal Node Version Manager for Windows and Unix.
 
 # Table Of Contents
 
