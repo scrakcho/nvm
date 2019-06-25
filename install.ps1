@@ -3,11 +3,16 @@ param (
     [string]$nvmlink
 )
 
+$nvmVersion = "1.0.7"
+$nvmVersionV = "v$nvmVersion";
+$DisableInstallNvmFromTgz = $false
+
+$NVM_ZIP_URL = "https://github.com/jchip/nvm/archive/$nvmVersionV.zip"
+$NVM_TGZ_URL = "https://registry.npmjs.org/@jchip/nvm/-/nvm-$nvmVersion.tgz"
+
 $ProgressPreference = "SilentlyContinue"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
-$nvmVersion = "v1.0.7";
 
 function Find-Folders {
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
@@ -225,14 +230,15 @@ New-ItemProperty -Path "HKCU:\Environment" -Name "NVM_HOME" -Value "$NVM_HOME" -
 # use setx once so it broadcasts WM_SETTINGCHANGE message
 setx.exe NVM_LINK "$NVM_LINK" | Out-Null
 
-function installNvm() {
-    $nvmZipUrl = "https://github.com/jchip/nvm/archive/$nvmVersion.zip"
+function installNvmFromZip() {
+    $nvmZipUrl = $NVM_ZIP_URL
 
     if ( -not (Test-Path $NVM_CACHE)) {
         New-Item -Path "$NVM_CACHE" -ItemType "directory" | Out-Null
     }
 
-    $nvmDestZipFile = "$NVM_CACHE\nvm-$nvmVersion.zip"
+    $nvmDestZipFile = "$NVM_CACHE\nvm-$nvmVersionV
+.zip"
 
     Write-Output "Retrieving $nvmZipUrl"
     Invoke-WebRequest $nvmZipUrl -OutFile $nvmDestZipFile
@@ -262,11 +268,35 @@ function installNvm() {
     $zip.Dispose()
 }
 
+function installNvmFromTgz() {
+    $nvmTgzUrl = $NVM_TGZ_URL
+
+    if ( -not (Test-Path $NVM_CACHE)) {
+        New-Item -Path "$NVM_CACHE" -ItemType "directory" | Out-Null
+    }
+
+    $nvmDestTgzFile = "$NVM_CACHE\nvm-$nvmVersionV
+.tgz"
+
+    Write-Output "Retrieving $nvmTgzUrl"
+    Invoke-WebRequest $nvmTgzUrl -OutFile $nvmDestTgzFile
+
+    & "$Env:SystemRoot\system32\tar.exe" -xf "$nvmDestTgzFile" -C "$NVM_HOME"
+    Copy-Item "$NVM_HOME\package\*" "$NVM_HOME" -Force -Recurse
+    Remove-Item "$NVM_HOME\package" -Recurse
+}
+
 if ( Test-Path $PSScriptRoot\test.ps1 ) {
     & $PSScriptRoot\test.ps1
 }
 else {
-    installNvm
+    ($tar = Get-Command "$Env:SystemRoot\system32\tar.exe" 2>&1) | Out-Null
+    if ( ($tar.Exception) -or ($DisableInstallNvmFromTgz) ) {
+        installNvmFromZip
+    }
+    else {
+        installNvmFromTgz
+    }
 }
 
 & nvm.ps1 install $DefaultNodeVersion
