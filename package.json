@@ -11,14 +11,13 @@
     "release": "webpack && node pack.js"
   },
   "dependencies": {
-    "async": "*",
     "colors": "*",
     "extract-zip": "jchip/extract-zip",
     "fd-slicer": "jchip/node-fd-slicer",
     "lodash": "^4.17.11",
     "mkdirp": "*",
+    "needle": "^2.4.0",
     "nix-clap": "^1.3.10",
-    "request": "*",
     "rmdir": "*",
     "tar": "^4.4.10"
   },
