@@ -28,6 +28,7 @@
     "webpack": "^4.34.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.4",
+    "xclap": "^0.2.33",
     "zipit": "^1.0.2"
   },
   "keys": [
