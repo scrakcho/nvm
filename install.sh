@@ -19,7 +19,7 @@ function fetch() {
 }
 
 function tmpdir() {
-  if [ -n $TMPDIR ]; then
+  if [ -n "$TMPDIR" ]; then
     echo "$TMPDIR"
   else
     echo "/tmp"
@@ -118,7 +118,15 @@ function installNvm() {
   echo "Fetching ${nvmTgzUrl}"
   fetch "${nvmTgzUrl}" "${nvmDestTgzFile}"
 
-  tar xzf "${nvmDestTgzFile}" --strip=1 --include "*/bin" --include "*/dist" --include "*/package.json" --directory "${NVM_HOME}"
+  local nvm_files
+  nvm_files="$(tmpdir)/nvm_files.txt"
+  cat >${nvm_files}<<EOF
+*/bin
+*/dist
+*/package.json
+EOF
+
+  tar xzf "${nvmDestTgzFile}" --directory="${NVM_HOME}" --strip=1 --files-from="$nvm_files" 
 }
 
 fetchNodeJS "${DEFAULT_NODE_VERSION}"
