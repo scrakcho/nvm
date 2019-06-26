@@ -81,9 +81,11 @@ xclap.load("nvm", {
       switch (bump) {
         case "--major":
           ver[0]++;
+          ver[1] = ver[2] = 0;
           break;
         case "--minor":
           ver[1]++;
+          ver[2] = 0;
           break;
         case "--patch":
           ver[2]++;
