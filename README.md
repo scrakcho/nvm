@@ -20,7 +20,7 @@ Tested on Windows 10, 8.1, and 7. Windows 7 requires PowerShell updates, see [up
 
 Start a Windows PowerShell terminal and run the following: (copy and paste into shell and press enter)
 
-From github.com:
+**From [github.com](https://www.github.com/jchip/nvm):**
 
 ```ps
 cd $Env:USERPROFILE;
@@ -29,7 +29,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.1.4/install.ps1
 del install.ps1
 ```
 
-From unpkg.com:
+**From [unpkg.com](https://unpkg.com):**
 
 ```ps
 cd $Env:USERPROFILE;
@@ -78,9 +78,10 @@ After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` 
 
 ### Unix
 
-Using cURL and the install script:
 
-From github.com:
+**From [github.com](https://www.github.com/jchip/nvm):**
+
+Using cURL and the install script:
 
 ```bash
 NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.1.4/install.sh | bash
@@ -92,7 +93,9 @@ or wget:
 NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.4/install.sh | bash
 ```
 
-From unpkg.com:
+**From [unpkg.com](https://unpkg.com):**
+
+Using cURL and the install script:
 
 ```bash
 NVM_HOME=~/nvm curl -o- https://unpkg.com/@jchip/nvm@1.1.4/install.sh | bash
