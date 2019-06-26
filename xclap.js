@@ -71,6 +71,7 @@ xclap.load("nvm", {
   publish: "npm publish",
 
   version: {
+    desc: "Bump version for release",
     task() {
       const data = readPkg();
       const pkg = JSON.parse(data);
