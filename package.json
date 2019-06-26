@@ -1,6 +1,6 @@
 {
   "name": "@jchip/nvm",
-  "description": "Node version manager for Windows and *nix",
+  "description": "Universal Node Version Manager (nvm) for Windows and Unix",
   "version": "1.0.12",
   "author": "Tom.Huang <hzlhu.dargon@gmail.com>",
   "contributors": [
@@ -37,7 +37,7 @@
     "xclap": "^0.2.33",
     "zipit": "^1.0.2"
   },
-  "keys": [
+  "keywords": [
     "Node",
     "version",
     "manager",
