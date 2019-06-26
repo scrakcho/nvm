@@ -21,9 +21,12 @@ function fetch() {
 
   wget=$(which wget)
   if [ "$?" == "0" ]; then
-    echo "fetch with wget"
+    wget "$1" --output-document="$2"
     return $?
   fi
+
+  echo "No curl or wget found"
+  exit 1
 }
 
 function tmpdir() {
