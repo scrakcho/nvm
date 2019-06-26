@@ -98,8 +98,15 @@ xclap.load("nvm", {
       replaceLine("install.sh", `NVM_VERSION="${oldVer}"`, `NVM_VERSION="${newVer}"`);
       pkg.version = newVer;
       Fs.writeFileSync("package.json", JSON.stringify(pkg, null, 2) + "\n");
+      const regex1 = new RegExp(`\\/v${oldVer.replace(/\./g, "\\.")}\\/`, "g");
+      const regex2 = new RegExp(`@${oldVer.replace(/\./g, "\\.")}\\/`, "g");
+      const readme = Fs.readFileSync("README.md", "utf8")
+        .replace(regex1, `/v${newVer}/`)
+        .replace(regex2, `@${newVer}/`);
+      Fs.writeFileSync("README.md", readme);
+
       return xclap.serial([
-        `~$git add install.ps1 install.sh package.json`,
+        `~$git add install.ps1 install.sh package.json README.md`,
         `~$git commit -m "${newVer}"`,
         `~$git tag "v${newVer}"`
       ]);
