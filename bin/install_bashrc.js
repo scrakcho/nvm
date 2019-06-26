@@ -24,6 +24,9 @@ const setNvmLinkCmd = `export NVM_LINK="${varNvmLink}"`;
 if (profile.indexOf(setNvmHomeCmd) < 0) {
   profile.push(setNvmHomeCmd);
   profile.push(setNvmLinkCmd);
+  if (process.env.NVM_NODEJS_ORG_MIRROR) {
+    profile.push(`export NVM_NODEJS_ORG_MIRROR="${process.env.NVM_NODEJS_ORG_MIRROR}"`);
+  }
   profile.push(`source "\$\{NVM_HOME}/bin/nvm.sh"\n`);
 
   fs.writeFileSync(profileFile, profile.join("\n"));
