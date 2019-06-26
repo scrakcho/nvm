@@ -5,7 +5,7 @@ param (
 
 $nvmVersion = "1.0.7"
 $nvmVersionV = "v$nvmVersion"
-$DisableInstallNvmFromTgz = $true
+$DisableInstallNvmFromTgz = $false
 
 $NVM_ZIP_URL = "https://github.com/jchip/nvm/archive/$nvmVersionV.zip"
 $NVM_TGZ_URL = "https://registry.npmjs.org/@jchip/nvm/-/nvm-$nvmVersion.tgz"
