@@ -16,6 +16,8 @@ This is a simple universal Node Version Manager for Windows and Unix.
 
 ### Windows
 
+***This install node.js in your user local only so you don't need admin rights, except being able to execute PowerShell scripts.***
+
 Tested on Windows 10, 8.1, and 7. Windows 7 requires PowerShell updates, see [update instructions](#windows-7-updates).
 
 Start a Windows PowerShell terminal and run the following: (copy and paste into shell and press enter)
