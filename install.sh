@@ -2,6 +2,12 @@
 NVM_VERSION="1.0.7"
 NVM_VERSION_V="v${NVM_VERSION}"
 
+if [ -n "$NVM_TEST" ]; then
+  NVM_TGZ_URL="https://github.com/jchip/nvm/archive/${NVM_VERSION_V}.tar.gz"
+else
+  NVM_TGZ_URL="https://registry.npmjs.org/@jchip/nvm/-/nvm-${NVM_VERSION}.tgz"
+fi
+
 if [ -z "${NVM_HOME}" ]; then
   export NVM_HOME="$HOME/nvm"
 fi
@@ -108,8 +114,6 @@ NVM_NODE="${NVM_HOME}/nodejs"
 NVM_NODE_BIN="${NVM_HOME}/node"
 
 function installNvm() {
-  local nvmTgzUrl
-  nvmTgzUrl="https://github.com/jchip/nvm/archive/${NVM_VERSION_V}.tar.gz"
   if [ ! -d "${NVM_CACHE}" ]; then
     mkdir -p "${NVM_CACHE}"
   fi
@@ -117,8 +121,8 @@ function installNvm() {
   local nvmDestTgzFile
   nvmDestTgzFile="${NVM_CACHE}/nvm-${NVM_VERSION_V}.tgz"
 
-  echo "Fetching ${nvmTgzUrl}"
-  fetch "${nvmTgzUrl}" "${nvmDestTgzFile}"
+  echo "Fetching ${NVM_TGZ_URL}"
+  fetch "${NVM_TGZ_URL}" "${nvmDestTgzFile}"
 
   local nvm_files
   nvm_files="$(tmpdir)/nvm_files.txt"
