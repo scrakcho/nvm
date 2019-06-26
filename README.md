@@ -26,7 +26,7 @@ Start a Windows PowerShell terminal and run the following: (copy and paste into 
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.1.6/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.1.7/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -35,7 +35,7 @@ del install.ps1
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.1.6/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.1.7/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -88,13 +88,13 @@ After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` 
 Using cURL and the install script:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.1.6/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.1.7/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.6/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.7/install.sh | bash
 ```
 
 **or from [unpkg.com](https://unpkg.com):**
@@ -102,13 +102,13 @@ NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.6/inst
 Using cURL and the install script:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://unpkg.com/@jchip/nvm@1.1.6/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://unpkg.com/@jchip/nvm@1.1.7/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.1.6/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.1.7/install.sh | bash
 ```
 
 
