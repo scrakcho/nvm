@@ -24,7 +24,7 @@ From github.com:
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.1.3/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.1.4/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -33,7 +33,7 @@ From unpkg.com:
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.1.3/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.1.4/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -83,25 +83,25 @@ Using cURL and the install script:
 From github.com:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.1.3/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.1.4/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.3/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.4/install.sh | bash
 ```
 
 From unpkg.com:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://unpkg.com/@jchip/nvm@1.1.3/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://unpkg.com/@jchip/nvm@1.1.4/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.1.3/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.1.4/install.sh | bash
 ```
 
 
