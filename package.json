@@ -11,6 +11,10 @@
     "preversion": "echo Do not run npm version, run clap version --major,minor,patch && exit 1",
     "prepublishOnly": "echo Do not run npm publish, run clap release && exit 1"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "dependencies": {
     "colors": "*",
     "extract-zip": "jchip/extract-zip",
