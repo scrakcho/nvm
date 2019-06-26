@@ -7,8 +7,6 @@
     "Joel Chen <joel123@gmail.com>"
   ],
   "scripts": {
-    "build": "webpack",
-    "release": "webpack && node pack.js",
     "preversion": "echo Do not run npm version, run clap version --major,minor,patch && exit 1",
     "prepublishOnly": "echo Do not run npm publish, run clap release && exit 1"
   },
