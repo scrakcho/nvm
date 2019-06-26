@@ -16,7 +16,7 @@ This is a simple universal Node Version Manager for Windows and Unix.
 
 ### Windows
 
-***This install node.js in your user local only so you don't need admin rights, except being able to execute PowerShell scripts.***
+***You don't need admin rights to install or use***, except the permission to execute PowerShell scripts.
 
 Tested on Windows 10, 8.1, and 7. Windows 7 requires PowerShell updates, see [update instructions](#windows-7-updates).
 
@@ -31,7 +31,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.1.6/install.ps1
 del install.ps1
 ```
 
-**From [unpkg.com](https://unpkg.com):**
+**or from [unpkg.com](https://unpkg.com):**
 
 ```ps
 cd $Env:USERPROFILE;
@@ -50,15 +50,17 @@ del install.ps1
 
 #### Troubleshooting
 
-- **_install.ps1 cannot be loaded because running scripts is disabled on this system._**
+- If you get the error:
 
-> You need to run PowerShell as administrator and `Set-ExecutionPolicy` to `RemoteSigned` first, and then start a normal PowerShell to run the install script.
->
-> ie: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned`
->
-> See this [StackOverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for details.
->
-> You need to keep this policy if you want to use `nvm` in PowerShell to switch node.js versions.
+> install.ps1 cannot be loaded because running scripts is disabled on this system.
+
+Then you need to run PowerShell as administrator and `Set-ExecutionPolicy` to `RemoteSigned` first, and then start a normal PowerShell to run the install script.
+
+ie: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned`
+
+See this [StackOverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for details.
+
+You need to keep this policy if you want to use `nvm` in PowerShell to switch node.js versions.
 
 #### Windows 7 Updates
 
@@ -95,7 +97,7 @@ or wget:
 NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.6/install.sh | bash
 ```
 
-**From [unpkg.com](https://unpkg.com):**
+**or from [unpkg.com](https://unpkg.com):**
 
 Using cURL and the install script:
 
