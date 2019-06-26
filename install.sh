@@ -136,18 +136,32 @@ EOF
 }
 
 fetchNodeJS "${DEFAULT_NODE_VERSION}"
-installNvm
+
+if [ -f "test.sh" ]; then
+  source test.sh
+else
+  installNvm
+fi
 
 source "${NVM_HOME}/bin/nvm.sh"
 
 function setBashRc() {
-  BASHRC=~/.bash_profile
+  BASH_RC="${HOME}/.bashrc"
+  BASH_PROFILE="${HOME}/.bash_profile"
 
-  if [ ! -f "${BASHRC}" ]; then
-    touch "${BASHRC}"
+  local rcfile
+
+  if [ -f "${BASHRC}" ]; then
+    rcfile="${BASHRC}"
+  else
+    rcfile="${BASH_PROFILE}"
   fi
 
-  ${NVM_NODE_BIN} ${NVM_HOME}/bin/install_bashrc.js "${BASHRC}"
+  if [ ! -f "${rcfile}" ]; then
+    touch "${rcfile}"
+  fi
+
+  ${NVM_NODE_BIN} ${NVM_HOME}/bin/install_bashrc.js "${rcfile}"
 }
 
 setBashRc
