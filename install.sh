@@ -151,8 +151,8 @@ function setBashRc() {
 
   local rcfile
 
-  if [ -f "${BASHRC}" ]; then
-    rcfile="${BASHRC}"
+  if [ -f "${BASH_RC}" ]; then
+    rcfile="${BASH_RC}"
   else
     rcfile="${BASH_PROFILE}"
   fi
