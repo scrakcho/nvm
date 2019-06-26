@@ -22,7 +22,7 @@ Start a Windows PowerShell terminal and run the following: (copy and paste into 
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/master/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.1.0/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -70,13 +70,13 @@ After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` 
 Using cURL and the install script:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/master/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.1.0/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/master/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.1.0/install.sh | bash
 ```
 
 ## Usage
