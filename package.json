@@ -17,7 +17,7 @@
     "access": "public"
   },
   "dependencies": {
-    "colors": "*",
+    "chalker": "^1.1.2",
     "extract-zip": "jchip/extract-zip",
     "fd-slicer": "jchip/node-fd-slicer",
     "lodash": "^4.17.11",

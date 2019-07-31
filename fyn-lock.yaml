@@ -1538,7 +1538,7 @@ caniuse-lite:
 chalk:
  _latest: 2.4.2
  _:
-  '^2.0.0,^2.0.1,^2.4.1': 2.4.2
+  '^2.0.0,^2.0.1,^2.4.1,^2.4.2': 2.4.2
  2.4.2:
   $: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
   _: 'https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz'
@@ -1546,6 +1546,16 @@ chalk:
    ansi-styles: ^3.2.1
    escape-string-regexp: ^1.0.5
    supports-color: ^5.3.0
+chalker:
+ _latest: 1.1.2
+ _:
+  ^1.1.2: 1.1.2
+ 1.1.2:
+  top: 1
+  $: sha512-DYaS9gfTsjQz8aYBKVlqicaXgNHfp6/HqOmNXdq40C/QgXl16kJSp2USdF8l2bJGDEE9hJKQqSGQVB5UczxnTA==
+  _: 'https://registry.npmjs.org/chalker/-/chalker-1.1.2.tgz'
+  dependencies:
+   chalk: ^2.4.2
 check-types:
  _latest: 8.0.3
  _:
@@ -1656,14 +1666,6 @@ color-name:
  1.1.3:
   $: sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
   _: 'https://registry.npmjs.org/color-name/-/color-name-1.1.3.tgz'
-colors:
- _latest: 1.3.3
- _:
-  '*': 1.3.3
- 1.3.3:
-  top: 1
-  $: sha512-mmGt/1pZqYRjMxB1axhTo16/snVZ5krrKkcmMeVKxzECMMXoCgnvTPp10QgHfcbQZw8Dq2jMNG6je4JlWU0gWg==
-  _: 'https://registry.npmjs.org/colors/-/colors-1.3.3.tgz'
 commander:
  _latest: 2.20.0
  _:
@@ -2468,6 +2470,21 @@ fs.realpath:
  1.0.0:
   $: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
   _: 'https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz'
+fsevents:
+ _latest: 2.0.7
+ _:
+  ^1.2.7: 1.2.9
+ 1.2.9:
+  hasI: 1
+  $: sha512-oeyj2H3EjjonWcFjD5NvZNE9Rqe4UW+nQBU2HNeKw0koVLEFIhtyETyAakeAM3de7Z/SW5kcA+fZUait9EApnw==
+  _: 'https://registry.npmjs.org/fsevents/-/fsevents-1.2.9.tgz'
+  dependencies:
+   nan: ^2.12.1
+   node-pre-gyp: ^0.12.0
+  bundleDependencies:
+   - node-pre-gyp
+  os:
+   - darwin
 get-caller-file:
  _latest: 2.0.5
  _:
@@ -3391,6 +3408,13 @@ ms:
  2.0.0:
   $: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
   _: 'https://registry.npmjs.org/ms/-/ms-2.0.0.tgz'
+nan:
+ _latest: 2.14.0
+ _:
+  ^2.12.1: 2.14.0
+ 2.14.0:
+  $: sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
+  _: 'https://registry.npmjs.org/nan/-/nan-2.14.0.tgz'
 nanomatch:
  _latest: 1.2.13
  _:
