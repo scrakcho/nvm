@@ -9,6 +9,7 @@
   "main": "install.sh",
   "license": "MIT",
   "scripts": {
+    "test": "clap check",
     "preversion": "echo Do not run npm version, run clap version --major,minor,patch && exit 1",
     "prepublishOnly": "echo Do not run npm publish, run clap release && exit 1"
   },
@@ -58,5 +59,26 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jchip/nvm.git"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ],
+    "check-coverage": true,
+    "statements": 0,
+    "branches": 0,
+    "functions": 0,
+    "lines": 0,
+    "cache": true
   }
 }
