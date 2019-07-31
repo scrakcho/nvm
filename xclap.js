@@ -9,6 +9,8 @@ const xclap = require("xclap");
 const pkgFile = Path.resolve("package.json");
 let pkgData;
 
+require("electrode-archetype-njs-module-dev")(xclap);
+
 function readPkg() {
   if (!pkgData) {
     pkgData = Fs.readFileSync(pkgFile);
