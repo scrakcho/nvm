@@ -16,7 +16,7 @@ This is a simple universal Node Version Manager for Windows and Unix.
 
 ### Windows
 
-***You don't need admin rights to install or use***, except the permission to execute PowerShell scripts.
+**_You don't need admin rights to install or use_**, except the permission to execute PowerShell scripts.
 
 Tested on Windows 10, 8.1, and 7. Windows 7 requires PowerShell updates, see [update instructions](#windows-7-updates).
 
@@ -82,7 +82,6 @@ After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` 
 
 ### Unix
 
-
 **From [github.com](https://www.github.com/jchip/nvm):**
 
 Using cURL and the install script:
@@ -111,7 +110,6 @@ or wget:
 NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.2.0/install.sh | bash
 ```
 
-
 ## Usage
 
 ```
@@ -129,9 +127,17 @@ Commands:
   nvm cleanup              remove stale local caches
 
 Options:
-  --version, -V, -v  Show version number
-  --help, -?, -h     Show help. Add a command to show its help          [string]
+  --proxy, -p                   Set network proxy URL                   [string]
+  --verifyssl, --ssl, --no-ssl  Turn on/off verify SSL certificate
+                                                       [boolean] [default: true]
+  --version, -V, -v             Show version number
+  --help, -?, -h                Show help. Add a command to show its help
+                                                                        [string]
 
+envs:
+
+  NVM_PROXY - set proxy URL
+  NVM_VERIFY_SSL - true/false
 
 Examples:
 
