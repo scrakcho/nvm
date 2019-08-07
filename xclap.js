@@ -41,7 +41,7 @@ xclap.load("nvm", {
       const dist = Path.resolve("dist");
       const data = readPkg();
       const pkg = JSON.parse(data);
-      delete pkg.scripts;
+      pkg.scripts = { preinstall: pkg.scripts.preinstall };
       delete pkg.dependencies;
       delete pkg.nyc;
       delete pkg.devDependencies;
