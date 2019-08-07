@@ -10,17 +10,18 @@ This is a simple universal Node Version Manager for Windows and Unix.
     - [Windows 7 Updates](#windows-7-updates)
   - [Unix](#unix)
 - [Usage](#usage)
+  - [Environments](#environments)
 - [License](#license)
 
 ## Installation
 
 ### Windows
 
-**_You don't need admin rights to install or use_**, except the permission to execute PowerShell scripts.
+**_You don't need admin rights to install or use_**, only the permission to execute PowerShell scripts.
 
 Tested on Windows 10, 8.1, and 7. Windows 7 requires PowerShell updates, see [update instructions](#windows-7-updates).
 
-Start a Windows PowerShell terminal and run the following: (copy and paste into shell and press enter)
+To install, start a Windows PowerShell terminal and run the following: (copy and paste into shell and press enter)
 
 **From [github.com](https://www.github.com/jchip/nvm):**
 
@@ -40,11 +41,11 @@ Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.2.0/install.ps1 -OutFile instal
 del install.ps1
 ```
 
-- This will install nvm and current LTS Node.js (v10.16.0) to directory `nvm` under your home specified by `$Env:USERPROFILE`.
+- This will install nvm and current LTS Node.js (v10.16.2) to directory `nvm` under your home specified by `$Env:USERPROFILE`.
 
-- If you want to install this under another directory, then set it different for the param `-nvmhome`.
+- If you want to install this under another directory, then set it with the param `-nvmhome`.
 
-- If you don't set it, then it will check `$Env:NVM_HOME`, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
+- If you don't set it, then `$Env:NVM_HOME` will be checked, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
 
 [Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
 
@@ -137,14 +138,24 @@ Options:
 envs:
 
   NVM_PROXY - set proxy URL
-  NVM_VERIFY_SSL - true/false
+  NVM_VERIFY_SSL - (true/false) turn on/off verify SSL certs
 
 Examples:
 
-    nvm install v10.16.0
-    nvm uninstall v12.4.0
-    nvm use v10.16.0
+    nvm install 12.8
+    nvm use 12
+    nvm uninstall 12.4
+
 ```
+
+### Environments
+
+These env flags can be set:
+
+| name             | values         | description                                 |
+| ---------------- | -------------- | ------------------------------------------- |
+| `NVM_PROXY`      | string         | An URL to a network proxy                   |
+| `NVM_VERIFY_SSL` | `true`/`false` | turn on/off node.js verify SSL certificates |
 
 ## License
 
