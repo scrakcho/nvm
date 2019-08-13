@@ -117,13 +117,13 @@ NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.2.1/install.sh | bash
 Usage: nvm <command> [options]
 
 Commands:
-  nvm install <version>    install the given version of Node
-  nvm uninstall <version>  uninstall the given version of Node
-  nvm use <version>        use the given version of Node in current shell
+  nvm install <version>    install the given version of Node.js
+  nvm uninstall <version>  uninstall the given version of Node.js
+  nvm use <version>        use the given version of Node.js in current shell
   nvm stop                 undo effects of nvm in current shell
-  nvm link <version>       permanently link the version of Node as default
+  nvm link <version>       permanently link the version of Node.js as default
   nvm unlink               permanently unlink the default version
-  nvm ls                   list the installed all Nodes
+  nvm ls                   list all the installed Node.js versions
   nvm ls-remote            list remote versions available for install
   nvm cleanup              remove stale local caches
 
@@ -145,6 +145,8 @@ Examples:
     nvm install 12.8
     nvm use 12
     nvm uninstall 12.4
+
+doc: https://www.npmjs.com/package/@jchip/nvm
 
 ```
 
