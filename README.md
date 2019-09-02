@@ -5,25 +5,43 @@ This is a simple universal Node Version Manager for Windows and Unix.
 # Table Of Contents
 
 - [Installation](#installation)
-  - [Windows](#windows)
+  - [Windows nvm](#windows-nvm)
+    - [Install from github.com](#install-from-githubcom)
+    - [Install from unpkg.com](#install-from-unpkgcom)
+    - [Install from jsdelivr.net](#install-from-jsdelivrnet)
     - [Troubleshooting](#troubleshooting)
     - [Windows 7 Updates](#windows-7-updates)
-  - [Unix](#unix)
+  - [Unix nvm](#unix-nvm)
+    - [Install from github.com](#install-from-githubcom-1)
+    - [Install from unpkg.com](#install-from-unpkgcom-1)
+    - [Install from jsdelivr.net](#install-from-jsdelivrnet-1)
 - [Usage](#usage)
   - [Environments](#environments)
 - [License](#license)
 
 ## Installation
 
-### Windows
+### Windows nvm
 
 **_You don't need admin rights to install or use_**, only the permission to execute PowerShell scripts.
 
 Tested on Windows 10, 8.1, and 7. Windows 7 requires PowerShell updates, see [update instructions](#windows-7-updates).
 
-To install, start a Windows PowerShell terminal and run the following: (copy and paste into shell and press enter)
+To install, start a Windows PowerShell and copy and paste one of the scripts below into the shell terminal and press enter.
 
-**From [github.com](https://www.github.com/jchip/nvm):**
+- This will install nvm and current LTS Node.js (v10.16.3) to directory `nvm` under your home specified by `$Env:USERPROFILE`.
+
+- If you want to install this under another directory, then set it with the param `-nvmhome`.
+
+- If you don't set it, then `$Env:NVM_HOME` will be checked, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
+
+[Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
+
+You can retrieve the install script from multiple sources. Listed below are three options for you to choose from in case one of them is down.
+
+#### Install from github.com
+
+> Retrieve install script from [github.com](https://www.github.com/jchip/nvm) directly:
 
 ```ps
 cd $Env:USERPROFILE;
@@ -32,7 +50,9 @@ Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.2.2/install.ps1
 del install.ps1
 ```
 
-**or from [unpkg.com](https://unpkg.com):**
+#### Install from unpkg.com
+
+> Retrieve install script from [unpkg.com](https://unpkg.com):
 
 ```ps
 cd $Env:USERPROFILE;
@@ -41,13 +61,16 @@ Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.2.2/install.ps1 -OutFile instal
 del install.ps1
 ```
 
-- This will install nvm and current LTS Node.js (v10.16.2) to directory `nvm` under your home specified by `$Env:USERPROFILE`.
+#### Install from jsdelivr.net
 
-- If you want to install this under another directory, then set it with the param `-nvmhome`.
+> Retrieve install script from [jsdelivr.net](https://www.jsdelivr.com/):
 
-- If you don't set it, then `$Env:NVM_HOME` will be checked, and if non-existent, then a Directory Browser dialog will be opened for you to create and choose a directory.
-
-[Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
+```ps
+cd $Env:USERPROFILE;
+Invoke-WebRequest https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.2/install.ps1 -OutFile install.ps1;
+.\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
+del install.ps1
+```
 
 #### Troubleshooting
 
@@ -81,9 +104,13 @@ After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` 
 
 [Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
 
-### Unix
+### Unix nvm
 
-**From [github.com](https://www.github.com/jchip/nvm):**
+You can retrieve the install script from multiple sources. Listed below are three options for you to choose from in case one of them is down.
+
+#### Install from github.com
+
+> Retrieve the install script from [github.com](https://www.github.com/jchip/nvm):
 
 Using cURL and the install script:
 
@@ -97,7 +124,9 @@ or wget:
 NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.2.2/install.sh | bash
 ```
 
-**or from [unpkg.com](https://unpkg.com):**
+#### Install from unpkg.com
+
+> Retrieve the install script from [unpkg.com](https://unpkg.com):
 
 Using cURL and the install script:
 
@@ -109,6 +138,22 @@ or wget:
 
 ```bash
 NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.2.2/install.sh | bash
+```
+
+#### Install from jsdelivr.net
+
+> Retrieve the install script from [jsdelivr.net](https://www.jsdelivr.com/):
+
+Using cURL and the install script:
+
+```bash
+NVM_HOME=~/nvm curl -o- https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.2/install.sh | bash
+```
+
+or wget:
+
+```bash
+NVM_HOME=~/nvm wget -qO- https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.2/install.sh | bash
 ```
 
 ## Usage
