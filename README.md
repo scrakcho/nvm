@@ -120,7 +120,7 @@ Commands:
   nvm install <version>    install the given version of Node.js
   nvm uninstall <version>  uninstall the given version of Node.js
   nvm use <version>        use the given version of Node.js in current shell
-  nvm stop                 undo effects of nvm in current shell
+  nvm stop                 undo effects of nvm in current shell [aliases: unuse]
   nvm link <version>       permanently link the version of Node.js as default
   nvm unlink               permanently unlink the default version
   nvm ls                   list all the installed Node.js versions
@@ -131,6 +131,7 @@ Options:
   --proxy, -p                   Set network proxy URL                   [string]
   --verifyssl, --ssl, --no-ssl  Turn on/off verify SSL certificate
                                                        [boolean] [default: true]
+  --latest                      Match latest version to uninstall
   --version, -V, -v             Show version number
   --help, -?, -h                Show help. Add a command to show its help
                                                                         [string]
