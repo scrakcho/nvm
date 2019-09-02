@@ -38,15 +38,12 @@ function replaceLine(file, oldLine, newLine) {
 xclap.load("nvm", {
   prepack: {
     task: () => {
-      const dist = Path.resolve("dist");
       const data = readPkg();
       const pkg = JSON.parse(data);
       pkg.scripts = { preinstall: pkg.scripts.preinstall };
       delete pkg.dependencies;
       delete pkg.nyc;
       delete pkg.devDependencies;
-      rimraf.sync(dist);
-      mkdirp.sync(dist);
 
       mkdirp.sync(Path.resolve(".tmp"));
       Fs.writeFileSync(Path.resolve(".tmp/package.json"), data);
@@ -60,7 +57,7 @@ xclap.load("nvm", {
     }
   },
 
-  ".prepare": ["nvm/prepack", "nvm/bundle"],
+  ".prepare": [".clean-dist", "nvm/bundle", "~$git diff --quiet", "nvm/prepack"],
 
   release: {
     desc: "Release a new version to npm.  package.json must be updated.",
@@ -68,17 +65,23 @@ xclap.load("nvm", {
     finally: ["nvm/postpack"]
   },
 
-  bundle: "webpack",
+  ".clean-dist"() {
+    const dist = Path.resolve("dist");
+    rimraf.sync(dist);
+    mkdirp.sync(dist);
+  },
 
+  bundle: "webpack",
   publish: "npm publish",
 
   version: {
     desc: "Bump version for release",
+    dep: ["bundle", "~$git diff --quiet"],
     task() {
       const data = readPkg();
       const pkg = JSON.parse(data);
       const oldVer = `${pkg.version}`;
-      const ver = oldVer.split(".").map(x => parseInt(x, 10));
+      let ver = oldVer.split(".").map(x => parseInt(x, 10));
       const bump = this.argv[1];
       switch (bump) {
         case "--major":
@@ -93,7 +96,9 @@ xclap.load("nvm", {
           ver[2]++;
           break;
         default:
-          throw new Error(`unknown version bump ${bump}`);
+          ver = bump.substring(2).split(".");
+          console.log(`Using ${bump} as new version`);
+          break;
       }
       const newVer = ver.join(".");
       replaceLine("install.ps1", `\$nvmVersion = "${oldVer}"`, `\$nvmVersion = "${newVer}"`);
@@ -108,7 +113,7 @@ xclap.load("nvm", {
       Fs.writeFileSync("README.md", readme);
 
       return xclap.serial([
-        `~$git add install.ps1 install.sh package.json README.md`,
+        `~$git add dist install.ps1 install.sh package.json README.md`,
         `~$git commit -m "${newVer}"`,
         `~$git tag "v${newVer}"`
       ]);
