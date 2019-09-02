@@ -1,27 +1,34 @@
-# nvm
+# @jchip/nvm
 
-This is a simple universal Node Version Manager for Windows and Unix.
+A universal node.js version manager for Windows (no admin) and Unix.
 
-# Table Of Contents
+- Install is simple with a PowerShell script on Windows, or a bash script on Unix.
 
-- [Installation](#installation)
-  - [Windows nvm](#windows-nvm)
-    - [Install from github.com](#install-from-githubcom)
-    - [Install from unpkg.com](#install-from-unpkgcom)
-    - [Install from jsdelivr.net](#install-from-jsdelivrnet)
-    - [Troubleshooting](#troubleshooting)
-    - [Windows 7 Updates](#windows-7-updates)
-  - [Unix nvm](#unix-nvm)
-    - [Install from github.com](#install-from-githubcom-1)
-    - [Install from unpkg.com](#install-from-unpkgcom-1)
-    - [Install from jsdelivr.net](#install-from-jsdelivrnet-1)
+- **No admin required on Windows to install or use.**
+
+- A linked system wide version that can be changed any time.
+
+- Change to any version independently in a terminal any time.
+
+## Table Of Contents
+
+- [Installing Windows nvm using PowerShell](#installing-windows-nvm-using-powershell)
+  - [Installing from github.com](#installing-from-githubcom)
+  - [Installing from unpkg.com](#installing-from-unpkgcom)
+  - [Installing from jsdelivr.net](#installing-from-jsdelivrnet)
+  - [Windows 7 Updates](#windows-7-updates)
+  - [Troubleshooting](#troubleshooting)
+    - [Running scripts disabled](#running-scripts-disabled)
+    - [No PowerShell](#no-powershell)
+- [Installing Unix nvm](#installing-unix-nvm)
+  - [Installing from github.com](#installing-from-githubcom-1)
+  - [Installing from unpkg.com](#installing-from-unpkgcom-1)
+  - [Installing from jsdelivr.net](#installing-from-jsdelivrnet-1)
 - [Usage](#usage)
   - [Environments](#environments)
 - [License](#license)
 
-## Installation
-
-### Windows nvm
+## Installing Windows nvm using PowerShell
 
 **_You don't need admin rights to install or use_**, only the permission to execute PowerShell scripts.
 
@@ -39,54 +46,40 @@ To install, start a Windows PowerShell and copy and paste one of the scripts bel
 
 You can retrieve the install script from multiple sources. Listed below are three options for you to choose from in case one of them is down.
 
-#### Install from github.com
+### Installing from github.com
 
-> Retrieve install script from [github.com](https://www.github.com/jchip/nvm) directly:
+Retrieve install script from [github.com](https://www.github.com/jchip/nvm) directly:
 
-```ps
+```powershell
 cd $Env:USERPROFILE;
 Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.2.8/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
 
-#### Install from unpkg.com
+### Installing from unpkg.com
 
-> Retrieve install script from [unpkg.com](https://unpkg.com):
+Retrieve install script from [unpkg.com](https://unpkg.com):
 
-```ps
+```powershell
 cd $Env:USERPROFILE;
 Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.2.8/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
 
-#### Install from jsdelivr.net
+### Installing from jsdelivr.net
 
-> Retrieve install script from [jsdelivr.net](https://www.jsdelivr.com/):
+Retrieve install script from [jsdelivr.net](https://www.jsdelivr.com/):
 
-```ps
+```powershell
 cd $Env:USERPROFILE;
 Invoke-WebRequest https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.8/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
 
-#### Troubleshooting
-
-- If you get the error:
-
-> install.ps1 cannot be loaded because running scripts is disabled on this system.
-
-Then you need to run PowerShell as administrator and `Set-ExecutionPolicy` to `RemoteSigned` first, and then start a normal PowerShell to run the install script.
-
-ie: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned`
-
-See this [StackOverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for details.
-
-You need to keep this policy if you want to use `nvm` in PowerShell to switch node.js versions.
-
-#### Windows 7 Updates
+### Windows 7 Updates
 
 PowerShell version 4+ is required.
 
@@ -104,13 +97,39 @@ After it's completed and rebooted, launch PowerShell and type `$PSVersionTable` 
 
 [Video Demo of upgrading Windows 7 to PowerShell 5.1 and then installing this](https://youtu.be/BFYcXLS5R_4)
 
-### Unix nvm
+### Troubleshooting
 
-You can retrieve the install script from multiple sources. Listed below are three options for you to choose from in case one of them is down.
+#### Running scripts disabled
 
-#### Install from github.com
+If you get the error:
 
-> Retrieve the install script from [github.com](https://www.github.com/jchip/nvm):
+> install.ps1 cannot be loaded because running scripts is disabled on this system.
+
+Then you need to set execution policy for PowerShell to `RemoteSigned` with the command:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+See this [StackOverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for details.
+
+You need to keep this policy if you want to use `nvm` in PowerShell to switch node.js versions.
+
+#### No PowerShell
+
+If you absolutely can't have PowerShell, then please submit an issue. I will make a list of manual steps to install this, and if there's interest, then I will make a standalone installer using 7zip.
+
+## Installing Unix nvm
+
+Because this is implemented in node.js, it happens to work on Unix also. It just need a different install script using bash.
+
+To retrieve and run the install script, provided below are three options for you to choose from in case one of them is down.
+
+Please pick one and then copy and paste it into a bash terminal to run.
+
+### Installing from github.com
+
+Retrieve the install script from [github.com](https://www.github.com/jchip/nvm):
 
 Using cURL and the install script:
 
@@ -124,9 +143,9 @@ or wget:
 NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.2.8/install.sh | bash
 ```
 
-#### Install from unpkg.com
+### Installing from unpkg.com
 
-> Retrieve the install script from [unpkg.com](https://unpkg.com):
+Retrieve the install script from [unpkg.com](https://unpkg.com):
 
 Using cURL and the install script:
 
@@ -140,9 +159,9 @@ or wget:
 NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.2.8/install.sh | bash
 ```
 
-#### Install from jsdelivr.net
+### Installing from jsdelivr.net
 
-> Retrieve the install script from [jsdelivr.net](https://www.jsdelivr.com/):
+Retrieve the install script from [jsdelivr.net](https://www.jsdelivr.com/):
 
 Using cURL and the install script:
 

@@ -1,6 +1,6 @@
 {
   "name": "@jchip/nvm",
-  "description": "Universal Node Version Manager (nvm) for Windows and Unix",
+  "description": "nvm: a universal node.js version manager for Windows (no admin) and Unix",
   "version": "1.2.8",
   "author": "Tom.Huang <hzlhu.dargon@gmail.com>",
   "contributors": [
@@ -52,6 +52,7 @@
     "nvm",
     "windows nvm",
     "nvm windows",
+    "no admin nvm",
     "universal",
     "universal nvm"
   ],
