@@ -31,21 +31,33 @@ const profileFile = process.argv[2] || path.join(homeDir, ".bash_profile");
 let profile = fs.existsSync(profileFile) ? fs.readFileSync(profileFile, "utf8").split("\n") : [];
 
 const beginIx = profile.indexOf(begin);
-const endIx = profile.indexOf(end);
+
+let firstPart = profile;
+let secondPart = [];
 
 if (beginIx >= 0) {
-  profile = profile.slice(0, beginIx).concat(profile.slice(endIx + 1));
+  firstPart = profile.slice(0, beginIx);
+  const endIx = profile.indexOf(end);
+  if (endIx < beginIx) {
+    secondPart = profile.slice(beginIx + 1);
+    console.log(
+      `WARNING:
+nvm install found begin marker but not end marker in your ${profileFile}
+please check these markers in the file and clean it up:
+${begin}
+${end}
+`
+    );
+  } else {
+    secondPart = profile.slice(endIx + 1);
+  }
 }
 
-const lastIx = profile.length - 1;
-if (profile[lastIx].length === 0) {
-  profile = profile.slice(0, lastIx);
+let updateProfile = firstPart.concat(commands, secondPart);
+// remove last line if it's empty
+const lastIx = updateProfile.length - 1;
+if (updateProfile[lastIx].trim().length === 0) {
+  updateProfile = updateProfile.slice(0, lastIx);
 }
 
-fs.writeFileSync(
-  profileFile,
-  profile
-    .concat(commands)
-    .concat("")
-    .join("\n")
-);
+fs.writeFileSync(profileFile, updateProfile.concat("").join("\n"));
