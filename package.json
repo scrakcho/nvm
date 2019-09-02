@@ -50,6 +50,8 @@
     "*nix",
     "windows",
     "nvm",
+    "windows nvm",
+    "nvm windows",
     "universal",
     "universal nvm"
   ],

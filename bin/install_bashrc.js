@@ -16,14 +16,22 @@ const varNvmLink = nvmLink.replace(homeDir, homeAlias);
 
 const begin = `# NVM bash initialize BEGIN - do not modify #`;
 const end = `# NVM bash initialize END - do not modify #`;
+const mirror = process.env.NVM_NODEJS_ORG_MIRROR;
+const mirrorEnv = mirror && `  export NVM_NODEJS_ORG_MIRROR="${mirror}"`;
 
 const commands = [
   begin,
   `export NVM_HOME="${varNvmHome}"`,
-  `export NVM_LINK="${varNvmLink}"`,
-  process.env.NVM_NODEJS_ORG_MIRROR &&
-    `export NVM_NODEJS_ORG_MIRROR="${process.env.NVM_NODEJS_ORG_MIRROR}"`,
-  `source "\$\{NVM_HOME}/bin/nvm.sh"`,
+  `NVM_SH="\$\{NVM_HOME}/bin/nvm.sh"`,
+  `if [ -s "\$\{NVM_SH}" ]; then`,
+  `  export NVM_LINK="${varNvmLink}"`,
+  mirrorEnv,
+  `  source "\$\{NVM_SH}"`,
+  `else`,
+  `  unset NVM_HOME`,
+  `  NVM_ERROR="\$\{NVM_SH} is not valid"`,
+  `fi`,
+  `unset NVM_SH`,
   end
 ].filter(x => x);
 
