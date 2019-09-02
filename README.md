@@ -45,7 +45,7 @@ You can retrieve the install script from multiple sources. Listed below are thre
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.2.2/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://raw.githubusercontent.com/jchip/nvm/v1.2.8/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -56,7 +56,7 @@ del install.ps1
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.2.2/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://unpkg.com/@jchip/nvm@1.2.8/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -67,7 +67,7 @@ del install.ps1
 
 ```ps
 cd $Env:USERPROFILE;
-Invoke-WebRequest https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.2/install.ps1 -OutFile install.ps1;
+Invoke-WebRequest https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.8/install.ps1 -OutFile install.ps1;
 .\install.ps1 -nvmhome $Env:USERPROFILE\nvm;
 del install.ps1
 ```
@@ -115,13 +115,13 @@ You can retrieve the install script from multiple sources. Listed below are thre
 Using cURL and the install script:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.2.2/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://raw.githubusercontent.com/jchip/nvm/v1.2.8/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.2.2/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.2.8/install.sh | bash
 ```
 
 #### Install from unpkg.com
@@ -131,13 +131,13 @@ NVM_HOME=~/nvm wget -qO- https://raw.githubusercontent.com/jchip/nvm/v1.2.2/inst
 Using cURL and the install script:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://unpkg.com/@jchip/nvm@1.2.2/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://unpkg.com/@jchip/nvm@1.2.8/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.2.2/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.2.8/install.sh | bash
 ```
 
 #### Install from jsdelivr.net
@@ -147,13 +147,13 @@ NVM_HOME=~/nvm wget -qO- https://unpkg.com/@jchip/nvm@1.2.2/install.sh | bash
 Using cURL and the install script:
 
 ```bash
-NVM_HOME=~/nvm curl -o- https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.2/install.sh | bash
+NVM_HOME=~/nvm curl -o- https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.8/install.sh | bash
 ```
 
 or wget:
 
 ```bash
-NVM_HOME=~/nvm wget -qO- https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.2/install.sh | bash
+NVM_HOME=~/nvm wget -qO- https://cdn.jsdelivr.net/npm/@jchip/nvm@1.2.8/install.sh | bash
 ```
 
 ## Usage
