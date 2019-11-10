@@ -50,7 +50,7 @@ function getLtsVersion() {
     if [ -n "$fv" ]; then
       echo "v$fv"
     else
-      echo "v10.16.2"
+      echo "v12.13.0"
     fi
 }
 
