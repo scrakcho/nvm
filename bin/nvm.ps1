@@ -1,5 +1,5 @@
 $Env:NVM_POWERSHELL = "true"
-$Env:NVM_PSPROFILE = "$PROFILE.CurrentUserAllHosts"
+$Env:NVM_PSPROFILE = "$PROFILE"
 
 Try {
   $NODE_EXE = "$PSScriptRoot\..\node.exe"
