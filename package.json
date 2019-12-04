@@ -18,6 +18,9 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "prettier": {
+    "printWidth": 100
+  },
   "dependencies": {
     "chalker": "^1.1.2",
     "extract-zip": "jchip/extract-zip",
