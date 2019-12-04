@@ -26,6 +26,17 @@ function nvm() {
     rm -rf "$TMPDIR/nvm_envx.sh"
   fi
 
+  local nvmInstall="$NVM_INSTALL"
+  unset NVM_INSTALL
+
+  if [ -n "$nvmInstall" ] && [ -f "$NVM_HOME/post-install.sh" ]; then
+    if [ -n "$SHELL" ]; then
+      $SHELL "$NVM_HOME/post-install.sh" "$nvmInstall"
+    else
+      bash "$NVM_HOME/post-install.sh" "$nvmInstall"
+    fi
+  fi
+
   return 0
 }
 

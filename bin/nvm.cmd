@@ -18,5 +18,17 @@ IF not exist "%TMP%\nvm_env.cmd" EXIT /b 0
 
 IF exist "%TMP%\nvm_envx.cmd" del "%TMP%\nvm_envx.cmd"
 ren "%TMP%\nvm_env.cmd" "nvm_envx.cmd"
-"%TMP%\nvm_envx.cmd"
+call "%TMP%\nvm_envx.cmd"
 del "%TMP%\nvm_envx.cmd"
+
+IF "%NVM_INSTALL%"=="" GOTO EXIT
+
+SET NVM_INSTALL_VER=%NVM_INSTALL%
+set NVM_INSTALL=
+
+IF exist "%NVM_HOME%\post-install.cmd" cmd.exe /C %NVM_HOME%\post-install.cmd %NVM_INSTALL_VER%
+
+SET NVM_INSTALL_VER=
+
+:EXIT
+

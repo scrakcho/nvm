@@ -21,3 +21,12 @@ if ( Test-Path $nvmEnv ) {
   & $nvmEnv
   Remove-Item -Path $nvmEnv
 }
+
+if ( Test-Path Env:NVM_INSTALL ) {
+  $version = "$Env:NVM_INSTALL"
+  Remove-Item Env:NVM_INSTALL
+  $postInstall = "$Env:NVM_HOME\post-install.ps1"
+  if ( Test-Path $postInstall ) {
+    powershell.exe $postInstall $version
+  }
+}
