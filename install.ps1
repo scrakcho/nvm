@@ -211,7 +211,7 @@ if ( -not ($DefaultNodeVersion -eq $existNodejsVersion) ) {
 }
 
 function Add-UserPath ($dirsToAdd) {
-    if ($dirsToAdd.count -gt 0) {
+    if (($null -ne $dirsToAdd) -and ($dirsToAdd.count -gt 0)) {
         # Update user's path in registry
         $newRegPath = [String]::Join(";", ($RegPath.split(";") + $dirsToAdd).Where( { $_ -ne "" }))
         New-ItemProperty -Path "HKCU:\Environment" -Name "Path" -Value "$newRegPath" -Force | Out-Null
@@ -289,8 +289,8 @@ if ( Test-Path $PSScriptRoot\test.ps1 ) {
 }
 else {
     ($tar = Get-Command "$Env:SystemRoot\system32\tar.exe" 2>&1) | Out-Null
-    if ( ($tar.Exception) -or ($DisableInstallNvmFromTgz) ) {
-        installNvmFromZip
+    if ( ($tar.GetType().Name -eq "ErrorRecord") -or ($DisableInstallNvmFromTgz)) {
+      installNvmFromZip
     }
     else {
         installNvmFromTgz
