@@ -1,17 +1,9 @@
-function postInstall() {
-  if [ -n "$1" ] && [ -f "$NVM_HOME/post-install.sh" ]; then
-    if [ -n "$SHELL" ]; then
-      $SHELL "$NVM_HOME/post-install.sh" "$1"
-    else
-      bash "$NVM_HOME/post-install.sh" "$1"
-    fi
-  fi
-}
-
 function nvm() {
   if [ -z "$NVM_HOME" ]; then
     NVM_HOME=~/nvm
   fi
+
+  export NVM_RUN_ID=$$
 
   NVM_NODE="$NVM_HOME/node"
   if [ ! -x "$NVM_NODE" ]; then
@@ -24,24 +16,31 @@ function nvm() {
     return 1
   fi
 
+  if [ -z "$TMPDIR" ]; then
+    TMPDIR="$($NVM_NODE -e "console.log(os.tmpdir())")"
+  else
+    export NVM_TMPDIR=$TMPDIR
+  fi
+
   $NVM_NODE "$NVM_HOME/dist/nvm.js" $*
 
-  if [ -z "$TMPDIR" ]; then
-    TMPDIR=/tmp
+  local TMP_ENV_FILE="$TMPDIR/nvm_env${NVM_RUN_ID}.sh"
+
+  if [ -f "$TMP_ENV_FILE" ]; then
+    source "$TMP_ENV_FILE"
+    rm -f "$TMP_ENV_FILE"
+
+    local nvmInstall="$NVM_INSTALL"
+    unset NVM_INSTALL
+
+    if [ -n "$nvmInstall" ] && [ -f "$NVM_HOME/post-install.sh" ]; then
+      if [ -n "$SHELL" ]; then
+        $SHELL "$NVM_HOME/post-install.sh" "$nvmInstall"
+      else
+        bash "$NVM_HOME/post-install.sh" "$nvmInstall"
+      fi
+    fi
   fi
-
-  if [ -f "$TMPDIR/nvm_env.sh" ]; then
-    MY_ENV_COPY="$TMPDIR/nvm_envx_$$.sh"
-    rm -f "$MY_ENV_COPY"
-    mv "$TMPDIR/nvm_env.sh" "$MY_ENV_COPY"
-    source "$MY_ENV_COPY"
-    rm -f "$MY_ENV_COPY"
-  fi
-
-  local nvmInstall="$NVM_INSTALL"
-  unset NVM_INSTALL
-
-  postInstall "${nvmInstall}"
 
   return 0
 }

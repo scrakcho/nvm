@@ -1,5 +1,6 @@
 $Env:NVM_POWERSHELL = "true"
 $Env:NVM_PSPROFILE = "$PROFILE"
+$Env:NVM_RUN_ID = "$PID"
 
 Try {
   $NODE_EXE = "$PSScriptRoot\..\node.exe"
@@ -15,7 +16,7 @@ Finally {
   Remove-Item Env:\NVM_POWERSHELL
 }
 
-$nvmEnv = "$Env:TMP\nvm_env.ps1"
+$nvmEnv = "$Env:TMP\nvm_env$PID.ps1"
 
 if ( Test-Path $nvmEnv ) {
   & $nvmEnv
