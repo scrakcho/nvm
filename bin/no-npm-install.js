@@ -1,4 +1,4 @@
-console.log(`
+console.error(`
 +===========================================================================================+
 |         NOTICE: The package @jchip/nvm is not intended to be installed by npm.            |
 |                                                                                           |
