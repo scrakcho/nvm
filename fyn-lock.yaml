@@ -4794,6 +4794,14 @@ prelude-ls:
  1.1.2:
   $: sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
   _: 'https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.1.2.tgz'
+prettier:
+ _latest: 2.0.5
+ _:
+  ^1.19.1: 1.19.1
+ 1.19.1:
+  top: 1
+  $: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
+  _: 'https://registry.npmjs.org/prettier/-/prettier-1.19.1.tgz'
 private:
  _latest: 0.1.8
  _:

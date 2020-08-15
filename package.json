@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.4.5",
     "babel-loader": "^8.0.6",
     "electrode-archetype-njs-module-dev": "^3.0.1",
+    "prettier": "^1.19.1",
     "webpack": "^4.34.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.4",

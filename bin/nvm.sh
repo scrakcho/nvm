@@ -1,3 +1,13 @@
+function postInstall() {
+  if [ -n "$1" ] && [ -f "$NVM_HOME/post-install.sh" ]; then
+    if [ -n "$SHELL" ]; then
+      $SHELL "$NVM_HOME/post-install.sh" "$1"
+    else
+      bash "$NVM_HOME/post-install.sh" "$1"
+    fi
+  fi
+}
+
 function nvm() {
   if [ -z "$NVM_HOME" ]; then
     NVM_HOME=~/nvm
@@ -5,11 +15,12 @@ function nvm() {
 
   NVM_NODE="$NVM_HOME/node"
   if [ ! -x "$NVM_NODE" ]; then
+    echo "Can't find default node.js binary at ${NVM_NODE}, trying 'which node'"
     NVM_NODE=$(which node)
   fi
 
   if [ ! -x "$NVM_NODE" ]; then
-    echo "Can't locate default node executable";
+    echo "Can't locate a default node.js executable to run nvm";
     return 1
   fi
 
@@ -20,22 +31,17 @@ function nvm() {
   fi
 
   if [ -f "$TMPDIR/nvm_env.sh" ]; then
-    rm -rf "$TMPDIR/nvm_envx.sh"
-    mv "$TMPDIR/nvm_env.sh" "$TMPDIR/nvm_envx.sh"
-    source "$TMPDIR/nvm_envx.sh"
-    rm -rf "$TMPDIR/nvm_envx.sh"
+    MY_ENV_COPY="$TMPDIR/nvm_envx_$$.sh"
+    rm -f "$MY_ENV_COPY"
+    mv "$TMPDIR/nvm_env.sh" "$MY_ENV_COPY"
+    source "$MY_ENV_COPY"
+    rm -f "$MY_ENV_COPY"
   fi
 
   local nvmInstall="$NVM_INSTALL"
   unset NVM_INSTALL
 
-  if [ -n "$nvmInstall" ] && [ -f "$NVM_HOME/post-install.sh" ]; then
-    if [ -n "$SHELL" ]; then
-      $SHELL "$NVM_HOME/post-install.sh" "$nvmInstall"
-    else
-      bash "$NVM_HOME/post-install.sh" "$nvmInstall"
-    fi
-  fi
+  postInstall "${nvmInstall}"
 
   return 0
 }
