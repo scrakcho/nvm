@@ -14,8 +14,10 @@ const homeAlias = process.env.HOME ? "${HOME}" : "~";
 const varNvmHome = nvmHome.replace(homeDir, homeAlias);
 const varNvmLink = nvmLink.replace(homeDir, homeAlias);
 
-const begin = `# NVM bash initialize BEGIN - do not modify #`;
-const end = `# NVM bash initialize END - do not modify #`;
+const shellName = process.argv[3] || "bash";
+
+const begin = `# NVM ${shellName} initialize BEGIN - do not modify #`;
+const end = `# NVM ${shellName} initialize END - do not modify #`;
 const mirror = process.env.NVM_NODEJS_ORG_MIRROR;
 const mirrorEnv = mirror && `  export NVM_NODEJS_ORG_MIRROR="${mirror}"`;
 

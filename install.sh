@@ -167,6 +167,22 @@ function setBashRc() {
   ${NVM_NODE_BIN} ${NVM_HOME}/bin/install_bashrc.js "${rcfile}"
 }
 
+# http://zsh.sourceforge.net/Intro/intro_3.html
+function setZshRc() {
+  ZD=${HOME}
+  if [ -n "${ZDOTDIR}" ]; then
+    ZD=${ZDOTDIR}
+  fi
+  ZSH_RC="${ZD}/.zshrc"
+
+  if [ ! -f "${ZSH_RC}" ]; then
+    touch "${ZSH_RC}"
+  fi
+
+  ${NVM_NODE_BIN} ${NVM_HOME}/bin/install_bashrc.js "${ZSH_RC}" zsh
+}
+
 setBashRc
+setZshRc
 
 nvm install $DEFAULT_NODE_VERSION
