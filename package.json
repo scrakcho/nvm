@@ -64,7 +64,8 @@
     "bin",
     "dist",
     "install.sh",
-    "install.ps1"
+    "install.ps1",
+    "check-registry.js"
   ],
   "repository": {
     "type": "git",
