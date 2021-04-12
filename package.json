@@ -15,7 +15,7 @@
     "preinstall": "node bin/no-npm-install.js"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.com/",
     "access": "public"
   },
   "prettier": {
