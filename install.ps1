@@ -46,7 +46,7 @@ function Find-Folders {
 function getLtsVersion() {
     $nodejsOrg = "https://nodejs.org"
     $nodejsHtml = "$Env:TMP\nodejs.html"
-    $foundVersion = "v12.13.0"
+    $foundVersion = "v18.16.0"
 
     Try {
         Invoke-WebRequest $nodejsOrg -OutFile $nodejsHtml
